@@ -1,5 +1,5 @@
 function App() {
-  return <></>;
+  return <>Hello LMS</>;
 }
 
 export default App;
