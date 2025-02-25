@@ -69,19 +69,6 @@ const SignIn = () => {
       </form>
       <button
         type="submit"
-
-
-
-
-
-
-
-
-
-
-
-
-        
         onClick={handleSubmit}
         className="mt-5 cursor-pointer bg-blue-500 text-white p-2 px-8 rounded"
       >
