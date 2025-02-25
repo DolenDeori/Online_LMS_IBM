@@ -1,10 +1,6 @@
-import hero_image from "../assets/images/hero_images.jpg";
-import hero_image2 from "../assets/images/hero_image.jpg";
 import logo from "../assets/images/logo.png";
 
 export const images = {
-  hero_image,
-  hero_image2,
   logo,
 };
 
