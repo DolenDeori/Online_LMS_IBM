@@ -6,11 +6,19 @@ import  authRouter from './routes/auth.routes.js'
 import connectToDatabase from './database/mongodb.js';
 import errorMiddleware from './middleware/error.middleware.js';
 import cookieParser from 'cookie-parser';
+import cors from "cors";
+
 
 const app = express();
 
+
+//Middleware
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+
+
+
 //in-built express middlewares
-app.use(express.json());   
+app.use(express.json());    // Ensure JSON parsing is enabled
 app.use(express.urlencoded({extended : false}));  //to handle html form data
 app.use(cookieParser());  //read cookies from incoming reqs adn store user data
 
