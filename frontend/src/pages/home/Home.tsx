@@ -8,7 +8,7 @@ const Home = ({ setBookId }: { setBookId: any }) => {
       <section className="p-4 mt-4">
         <h1 className="text-xl font-semibold">Our Book Collections</h1>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6 mt-4 gap-y-8">
+        <div className="columns-5 space-y-8 mt-5 mb-5">
           {books.map((book) => (
             <div
               key={book.id}
@@ -19,11 +19,11 @@ const Home = ({ setBookId }: { setBookId: any }) => {
                 <img
                   src={book.coverImage}
                   alt="book cover image"
-                  className="p-1 border-2 w-full object-cover object-top"
+                  className=" w-full rounded-md"
                 />
+                <h2 className="font-semibold text-sm">{book.title}</h2>
+                <p className="text-xs">{book.author}</p>
               </div>
-              <h2 className="font-semibold text-sm">{book.title}</h2>
-              <p className="text-xs">{book.author}</p>
             </div>
           ))}
         </div>
