@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import SignIn from "./auth/SignIn.tsx";
 import SignUp from "./auth/SignUp.tsx";
 import Profile from "./auth/Profile.tsx";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
