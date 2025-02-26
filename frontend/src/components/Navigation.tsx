@@ -5,7 +5,7 @@ const Navigation = () => {
   return (
     <header>
       {/* ------------ navigation bar start ------------------- */}
-      <nav className="py-8 px-3 border-r-2 h-svh flex flex-col justify-between items-center font-funnel bg-blue-100">
+      <nav className="py-8 px-2 lg:px-3 border-r-2 h-svh flex flex-col justify-between items-center font-funnel bg-blue-100">
         <div>
           <NavLink to="/" className="flex items-center justify-center" end>
             <img src={images.logo} alt="image logo" className="h-10" />
