@@ -22,17 +22,20 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:5500/api/v1/auth/sign-up", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-        }),
-      });
+      const response = await fetch(
+        "http://localhost:5500/api/v1/auth/sign-up",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+          }),
+        }
+      );
 
       const data = await response.json();
 
@@ -47,13 +50,19 @@ const SignUp = () => {
   };
 
   return (
-    <div className="h-svh w-full flex flex-col justify-center items-center bg-gray-200">
+    <div className="h-svh w-full flex flex-col justify-center items-center font-funnel">
+      <p className="absolute top-4 left-4">
+        <NavLink to="/" end>
+          <i className="bi bi-caret-left-fill"></i>
+          Back to Home
+        </NavLink>
+      </p>
       <h1 className="font-bold text-3xl">Sign Up</h1>
-      <form className="mt-5 space-y-2" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-y-2">
+      <form className="mt-6 flex flex-col" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-y">
           <label htmlFor="name">Name</label>
           <input
-            className="border p-2 outline-none"
+            className="border-2 p-2 outline-none rounded-md"
             type="text"
             name="name"
             value={formData.name}
@@ -62,10 +71,11 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="flex flex-col gap-y-2">
+
+        <div className="flex flex-col gap-y mt-3">
           <label htmlFor="email">Email</label>
           <input
-            className="border p-2 outline-none"
+            className="border-2 p-2 outline-none rounded-md"
             type="email"
             name="email"
             value={formData.email}
@@ -74,10 +84,11 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="flex flex-col gap-y-2">
+
+        <div className="flex flex-col gap-y mt-3">
           <label htmlFor="password">Password</label>
           <input
-            className="border p-2 outline-none"
+            className="border-2 p-2 outline-none rounded-md"
             type="password"
             name="password"
             value={formData.password}
@@ -86,10 +97,11 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="flex flex-col gap-y-2">
+
+        <div className="flex flex-col gap-y mt-3">
           <label htmlFor="confirm_password">Confirm Password</label>
           <input
-            className="border p-2 outline-none"
+            className="border-2 p-2 outline-none rounded-md"
             type="password"
             name="confirm_password"
             value={formData.confirm_password}
@@ -98,16 +110,17 @@ const SignUp = () => {
             required
           />
         </div>
+
         <button
           type="submit"
-          className="mt-5 cursor-pointer bg-blue-500 text-white p-2 px-8 rounded"
+          className="mt-5 cursor-pointer bg-blue-700 text-white p-2 px-8 rounded-md"
         >
           Create Account
         </button>
       </form>
       <p className="mt-5">
         Already have an account?{" "}
-        <NavLink to="/auth/signin" className="font-bold text-blue-500">
+        <NavLink to="/auth/signin" className="font-bold text-blue-700">
           Login
         </NavLink>
       </p>
