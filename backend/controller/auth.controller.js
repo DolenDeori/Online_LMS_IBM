@@ -23,7 +23,7 @@ try {
         const error = new Error('User already exists');
         error.statusCode = 409;
         throw error;
-    }
+    };  
 
     //Hash password for the new user--> if the user does not exist i.e new user
     const salt =  await bcrypt.genSalt(10); // salt -> level of complexity to randomise the password
