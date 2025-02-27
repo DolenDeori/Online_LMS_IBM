@@ -1,13 +1,10 @@
-import Navigation from "@/components/Navigation";
 import { books } from "@/constants";
-import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
 
 const Profile = () => {
+  const navigate = useNavigate();
   return (
     <div className="flex h-svh">
-      <div>
-        <Navigation />
-      </div>
       <div className="h-svh w-full flex-2 font-funnel">
         <div className="flex flex-col items-center pb-8">
           <div className="border-6 border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
@@ -49,10 +46,11 @@ const Profile = () => {
               </tbody>
             </table>
           </div>
-          <button className="p-2 bg-blue-500 mt-5 rounded px-4 text-white cursor-pointer">
-            <NavLink to="/" end>
-              Explore More Books
-            </NavLink>
+          <button
+            className="p-2 bg-blue-800 mt-5 rounded-full px-4 text-white cursor-pointer"
+            onClick={() => navigate("/")}
+          >
+            Explore More Books
           </button>
         </div>
       </div>
