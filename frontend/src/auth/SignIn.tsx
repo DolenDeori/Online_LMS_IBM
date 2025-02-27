@@ -1,7 +1,8 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -33,6 +34,11 @@ const SignIn = () => {
 
       if (response.ok) {
         alert("User signed in successfully!");
+        localStorage.setItem("token", data.token);
+        console.log("token data", data.token);
+        
+        // automatic redirect the user.
+        navigate("/auth/profile");
       } else {
         alert(data.message || "Error occurred!");
       }
