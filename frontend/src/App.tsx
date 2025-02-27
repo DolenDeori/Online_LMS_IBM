@@ -13,7 +13,6 @@ function App() {
   const location = useLocation();
 
   const hideNavigation = location.pathname.startsWith("/auth");
-  // const hideSearchNavigation = location.pathname.startsWith("/home");
 
   return (
     <div className="flex h-screen">
