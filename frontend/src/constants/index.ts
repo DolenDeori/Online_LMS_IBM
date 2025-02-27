@@ -102,17 +102,6 @@ export const books = [
       "https://i.pinimg.com/736x/70/d3/02/70d302fa2e288cd9979e0794cd37d227.jpg",
   },
   {
-    id: 10,
-    title: "The Lord of the Rings",
-    author: "J.R.R. Tolkien",
-    publishDate: "1954-07-29",
-    pages: 1178,
-    available: true,
-    starReview: 4.9,
-    coverImage:
-      "https://upload.wikimedia.org/wikipedia/en/f/fb/Lord_Rings_Fellowship_Ring.jpg",
-  },
-  {
     id: 11,
     title: "Brave New World",
     author: "Aldous Huxley",
@@ -207,16 +196,5 @@ export const books = [
     available: true,
     starReview: 4.4,
     coverImage: "https://m.media-amazon.com/images/I/71KxgOTl4-L._SY385_.jpg",
-  },
-  {
-    id: 20,
-    title: "Anna Karenina",
-    author: "Leo Tolstoy",
-    publishDate: "1878-01-01",
-    pages: 864,
-    available: false,
-    starReview: 4.7,
-    coverImage:
-      "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781451685558/anna-karenina-9781451685558_lg.jpg",
   },
 ];

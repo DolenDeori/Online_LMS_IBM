@@ -3,12 +3,12 @@ import { books } from "@/constants";
 
 const Home = ({ setBookId }: { setBookId: any }) => {
   return (
-    <main className="bg-blue-100 h-svh overflow-y-scroll font-funnel relative">
+    <main className=" h-svh overflow-y-scroll font-funnel relative">
       <SearchNav />
       <section className="p-4 mt-4">
         <h1 className="text-xl font-semibold">Our Book Collections</h1>
 
-        <div className="columns-5 space-y-8 mt-5 mb-5">
+        <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-8 mt-5 mb-5">
           {books.map((book) => (
             <div
               key={book.id}
