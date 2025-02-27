@@ -1,24 +1,29 @@
 import { useState } from "react";
-import BookInfo from "./components/BookInfo";
 import Navigation from "./components/Navigation";
-import Home from "./pages/home/Home";
+import Home from "./pages/Home";
+import { Route, Routes, useLocation } from "react-router";
+import BookInfo from "./pages/BookInfo";
+import SignIn from "./auth/SignIn";
+import SignUp from "./auth/SignUp";
+import Explore from "./pages/Explore";
 
 function App() {
-  const [bookInfo, setBookInfo] = useState(0);
+  const location = useLocation();
+
+  const hideNavigation = location.pathname.startsWith("/auth");
+
   return (
-    <div className="flex h-svh">
-      <div>
-        <Navigation />
-      </div>
-      <div className="flex-2 relative">
-        <Home setBookId={setBookInfo} />
-      </div>
-      <div
-        className={`flex-1 ${
-          bookInfo === 0 ? "hidden" : ""
-        } absolute top-0 right-0 h-full shadow-2xl duration-200 lg:w-[400px] md:w-1/2 w-full`}
-      >
-        <BookInfo bookId={bookInfo} setBookId={setBookInfo} />
+    <div className="flex h-screen">
+      {!hideNavigation && <Navigation />}
+
+      <div className="flex-1 relative overflow-y-scroll">
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/books/:id" element={<BookInfo />} />
+          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/auth/signup" element={<SignUp />} />
+        </Routes>
       </div>
     </div>
   );
