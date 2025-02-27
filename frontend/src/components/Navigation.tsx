@@ -48,12 +48,12 @@ const Navigation = () => {
                 onMouseLeave={() => setShowNavLink(null)}
               >
                 <NavLink
-                  to="/explore"
+                  to="/home/explore"
                   className="text-xs font-funnel font-semibold flex flex-col items-center justify-center gap-1"
                 >
                   <i
                     className={`bi bi-compass${
-                      location.pathname === "/explore" ? "-fill" : ""
+                      location.pathname === "/home/explore" ? "-fill" : ""
                     } text-2xl`}
                   ></i>
                   {showNavLink === "explore" && (
@@ -69,12 +69,12 @@ const Navigation = () => {
                 onMouseLeave={() => setShowNavLink(null)}
               >
                 <NavLink
-                  to="/saved"
+                  to="/home/saved"
                   className="text-xs font-funnel font-semibold flex flex-col items-center justify-center gap-1"
                 >
                   <i
                     className={`bi bi-bookmark${
-                      location.pathname === "/saved" ? "-fill" : ""
+                      location.pathname === "/home/saved" ? "-fill" : ""
                     } text-2xl`}
                   ></i>
                   {showNavLink === "saved" && (
