@@ -8,7 +8,7 @@ const Navigation = () => {
   return (
     <header>
       {/* ------------ navigation bar start ------------------- */}
-      <nav className="py-8 px-2 lg:px-4 border-r border-gray-300 h-svh flex flex-col justify-between items-center font-funnel">
+      <nav className="py-8 px-2 lg:px-4 border-r border-gray-300 h-svh flex flex-col justify-between items-center font-funnel z-100">
         <div>
           <NavLink to="/" className="flex items-center justify-center" end>
             <img
@@ -21,7 +21,7 @@ const Navigation = () => {
           <div className="mt-8">
             <ul className="flex flex-col justify-center items-center gap-y-8">
               <li
-                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-md cursor-pointer"
+                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
                 onMouseEnter={() => setShowNavLink("home")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
@@ -36,14 +36,14 @@ const Navigation = () => {
                   ></i>
 
                   {showNavLink === "home" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-md z-1">
-                      home
+                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                      Home
                     </span>
                   )}
                 </NavLink>
               </li>
               <li
-                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-md cursor-pointer"
+                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
                 onMouseEnter={() => setShowNavLink("explore")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
@@ -57,14 +57,14 @@ const Navigation = () => {
                     } text-2xl`}
                   ></i>
                   {showNavLink === "explore" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-md z-1">
-                      explore
+                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                      Explore
                     </span>
                   )}
                 </NavLink>
               </li>
               <li
-                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-md cursor-pointer"
+                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
                 onMouseEnter={() => setShowNavLink("saved")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
@@ -78,8 +78,8 @@ const Navigation = () => {
                     } text-2xl`}
                   ></i>
                   {showNavLink === "saved" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-md z-1">
-                      saved
+                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                      Saved
                     </span>
                   )}
                 </NavLink>
