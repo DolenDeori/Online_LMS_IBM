@@ -1,13 +1,11 @@
 import { books } from "@/constants";
-import { NavLink, useNavigate } from "react-router";
-import SearchNav from "@/components/SearchNav";
+import { useNavigate } from "react-router";
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <SearchNav />
       <main className="h-svh font-funnel">
         <section className="p-4">
           <h1 className="text-xl font-semibold">Our Book Collections</h1>
@@ -17,7 +15,7 @@ const Home = () => {
               <div
                 key={book.id}
                 className="cursor-pointer"
-                onClick={() => navigate(`/books/${book.id}`)}
+                onClick={() => navigate(`/home/books/${book.id}`)}
               >
                 <div className="bg-black rounded-xl overflow-hidden relative">
                   <img
