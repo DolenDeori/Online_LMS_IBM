@@ -15,7 +15,6 @@ function App() {
   return (
     <div className="flex h-screen">
       {!hideNavigation && <Navigation />}
-
       <div className="flex-1 relative overflow-y-scroll">
         <Routes>
           <Route index element={<Home />} />
