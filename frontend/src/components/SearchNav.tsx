@@ -1,8 +1,12 @@
-import { NavLink } from "react-router";
+import { images } from "@/constants";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router";
 
 const SearchNav = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const navigate = useNavigate();
   return (
-    <div className="p-4 z-10 flex justify-between items-center gap-4 sticky top-0 left-0 w-full bg-white font-funnel">
+    <div className="p-4 px-8 z-10 flex justify-between items-center gap-2 sticky top-0 left-0 w-full bg-white font-funnel">
       <div className="bg-gray-200 flex justify-between items-center rounded-xl p-1 px-4 flex-2 border-2 border-gray-200 gap-1">
         <i className="bi bi-search text-md text-gray-500"></i>
         <input
@@ -11,20 +15,29 @@ const SearchNav = () => {
           placeholder="Search for Title, Author, Host or Topic ..."
         />
       </div>
-      <div className="flex gap-1">
-        <NavLink
-          to="/auth/signup"
-          className="p-2.5 bg-white text-sm text-blue-700 rounded-l-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
+      {isAuthenticated ? (
+        <button
+          className="hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 overflow-hidden cursor-pointer"
+          onClick={() => navigate("/auth/profile")}
         >
-          Sign Up
-        </NavLink>
-        <NavLink
-          to="/auth/signin"
-          className="p-2.5 bg-white text-sm text-blue-700 rounded-r-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
-        >
-          Sign In
-        </NavLink>
-      </div>
+          <img src={images.demo_profile_1} alt="" className="rounded-full" />
+        </button>
+      ) : (
+        <div className="flex gap-1">
+          <NavLink
+            to="/auth/signup"
+            className="p-2.5 bg-white text-sm text-blue-700 rounded-l-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
+          >
+            Sign Up
+          </NavLink>
+          <NavLink
+            to="/auth/signin"
+            className="p-2.5 bg-white text-sm text-blue-700 rounded-r-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
+          >
+            Sign In
+          </NavLink>
+        </div>
+      )}
     </div>
   );
 };

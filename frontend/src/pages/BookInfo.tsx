@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import Home from "./Home";
 
 interface Book {
@@ -21,10 +21,10 @@ const BookInfo = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:5500/api/v1/books/${id}`) 
+    fetch(`http://localhost:5500/api/v1/books/${id}`)
       .then((res) => res.json())
       .then((data) => {
-        setBook(data.data); 
+        setBook(data.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -60,7 +60,8 @@ const BookInfo = () => {
               alt={`${book.title || "Unknown"} - Book Cover Image`}
               className="rounded-xl"
               onError={(e) => {
-                (e.target as HTMLImageElement).src = "https://via.placeholder.com/200";
+                (e.target as HTMLImageElement).src =
+                  "https://via.placeholder.com/200";
               }}
             />
           </div>
@@ -68,7 +69,9 @@ const BookInfo = () => {
             <div className="flex flex-col h-full gap-8">
               {/* Book Title and Author */}
               <div>
-                <h1 className="text-3xl font-bold">{book.title || "Unknown Title"}</h1>
+                <h1 className="text-3xl font-bold">
+                  {book.title || "Unknown Title"}
+                </h1>
                 <h2>{book.author || "Unknown Author"}</h2>
               </div>
 
@@ -80,7 +83,9 @@ const BookInfo = () => {
                 <div className="flex gap-2 justify-between items-center mt-4">
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center">
-                      <p>{book.starReview ? book.starReview.toFixed(2) : "N/A"}</p>
+                      <p>
+                        {book.starReview ? book.starReview.toFixed(2) : "N/A"}
+                      </p>
                       {book.starReview !== undefined ? (
                         <i className="bi bi-star-fill text-xs text-yellow-500"></i>
                       ) : (
@@ -90,7 +95,7 @@ const BookInfo = () => {
                     <p className="text-xs text-gray-500">Rating</p>
                   </div>
 
-                    <div className="h-6 w-[1px] bg-gray-300"></div>
+                  <div className="h-6 w-[1px] bg-gray-300"></div>
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex items-center justify-center">
@@ -105,7 +110,7 @@ const BookInfo = () => {
                     <p className="text-xs text-gray-500">Availability</p>
                   </div>
 
-                    <div className="h-6 w-[1px] bg-gray-300"></div>
+                  <div className="h-6 w-[1px] bg-gray-300"></div>
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center">

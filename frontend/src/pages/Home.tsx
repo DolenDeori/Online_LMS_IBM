@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
-
 interface Book {
   _id: string;
   title: string;
@@ -13,20 +12,19 @@ interface Book {
   coverImage: string;
 }
 
-const Home = () => {
+const Home = ({ home_title }: { home_title: string }) => {
   const navigate = useNavigate();
-  const [books, setBooks] = useState<Book[]>([]); 
+  const [books, setBooks] = useState<Book[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:5500/api/v1/books") 
+    fetch("http://localhost:5500/api/v1/books")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched Books:", data); 
-        setBooks(data.data); 
+        console.log("Fetched Books:", data);
+        setBooks(data.data);
       })
       .catch((err) => console.error("Error fetching books:", err));
-}, []);
-
+  }, []);
 
   return (
     <>
@@ -34,7 +32,7 @@ const Home = () => {
         <section className="p-4">
           <h1 className="text-xl font-semibold">{home_title}</h1>
 
-          <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-12 mt-5 mb-5">
+          <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-8 mt-5 mb-5">
             {books.length > 0 ? (
               books.map((book) => (
                 <div
@@ -52,7 +50,8 @@ const Home = () => {
                   <div>
                     <h2 className="text-gray-800">{book.title}</h2>
                     <p className="flex items-center gap-1 text-sm text-gray-600">
-                      {book.starReview} <i className="bi bi-star-fill text-xs"></i>
+                      {book.starReview}{" "}
+                      <i className="bi bi-star-fill text-xs"></i>
                     </p>
                   </div>
                 </div>
