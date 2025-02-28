@@ -1,8 +1,20 @@
 import { books } from "@/constants";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const [user, setUser] = useState<{ name: string; email: string } | null>(
+    null
+  );
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      navigate("/auth/signin");
+    }
+  }, [navigate]);
   return (
     <div className="flex h-svh">
       <div className="h-svh w-full flex-2 font-funnel">
@@ -10,8 +22,10 @@ const Profile = () => {
           <div className="border-6 border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
             <h1 className="font-bold">D</h1>
           </div>
-          <h1 className="font-semibold mt-2 text-xl">Dolen Deori</h1>
-          <p>dulendeori@gmail.com</p>
+          <h1 className="font-semibold mt-2 text-xl">
+            {user?.name || "unknown user"}
+          </h1>
+          <p>{user?.email || "No email found"}</p>
         </div>
 
         <div className="mt-8 px-8">
