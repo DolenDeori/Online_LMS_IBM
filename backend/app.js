@@ -36,7 +36,7 @@ res.send("Welcome to the Subscription Tracker API!");
 });
 
 app.listen(PORT , async () =>{
-    console.log(`Subscription Tracker API is running on http://localhost:${PORT}`);
+    console.log(`Gulumulu is running on http://localhost:${PORT}`);
     await connectToDatabase();
   
 })
