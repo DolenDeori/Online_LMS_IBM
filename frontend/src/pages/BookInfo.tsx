@@ -52,7 +52,13 @@ const BookInfo = () => {
 
   return (
     <main>
-      <section className="p-4 flex justify-center w-[50%]  m-auto items-center rounded-2xl font-funnel">
+      <section className="p-4 flex justify-center w-[50%] gap-4 m-auto rounded-2xl font-funnel">
+        <button
+          onClick={() => navigate("/")}
+          className="hover:bg-gray-200 h-12 w-13 rounded-full flex justify-center items-center cursor-pointer duration-200"
+        >
+          <i className="bi bi-arrow-left text-xl"></i>
+        </button>
         <div className="lg:flex justify-center gap-8 w-full">
           <div className="flex-1">
             <img
@@ -131,9 +137,14 @@ const BookInfo = () => {
                 </p>
               </div>
             </div>
-            <button className="bg-blue-800 text-white p-2 rounded-full cursor-pointer">
-              Borrow Book
-            </button>
+            <div className="flex gap-0.5  ">
+              <button className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer">
+                Borrow Book
+              </button>
+              <button className="bg-blue-800 text-white px-4 rounded-r-3xl rounded-l-sm cursor-pointer">
+                <i className="bi bi-bookmark"></i>
+              </button>
+            </div>
           </div>
         </div>
       </section>
