@@ -1,3 +1,4 @@
+import { images } from "@/constants";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -65,10 +66,14 @@ const Profile = () => {
     <div className="flex h-svh">
       <div className="h-svh w-full flex-2 font-funnel">
         <div className="flex flex-col items-center pb-8">
-          <div className="border-6 border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
-            <h1 className="font-bold">
-              {user?.name?.charAt(0).toUpperCase() || "U"}
-            </h1>
+          <div className="border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
+            <div>
+              <img
+                src={images.demo_profile_1}
+                alt=""
+                className="rounded-full"
+              />
+            </div>
           </div>
           <h1 className="font-semibold mt-2 text-xl">
             {user?.name || "Unknown User"}
