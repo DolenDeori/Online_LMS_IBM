@@ -8,6 +8,7 @@ import Explore from "./pages/Explore";
 import Saved from "./pages/Saved";
 import SearchNav from "./components/SearchNav";
 import Profile from "./auth/Profile";
+import ProtectedRoute from "./route/ProtectedRoute";
 
 function App() {
   const location = useLocation();
@@ -27,7 +28,9 @@ function App() {
           <Route path="/home/books/:id" element={<BookInfo />} />
           <Route path="/auth/signin" element={<SignIn />} />
           <Route path="/auth/signup" element={<SignUp />} />
-          <Route path="/auth/profile" element={<Profile />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/auth/profile" element={<Profile />} />
+          </Route>
         </Routes>
       </div>
     </div>
