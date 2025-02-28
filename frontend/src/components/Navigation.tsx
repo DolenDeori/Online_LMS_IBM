@@ -95,7 +95,9 @@ const Navigation = ({ isAuth }: { isAuth: boolean }) => {
 
         {isAuth ? (
           <button
-            className="hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 overflow-hidden cursor-pointer"
+            className={`hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 overflow-hidden cursor-pointer ${
+              location.pathname === "/profile" ? "border-2" : ""
+            } `}
             onClick={() => navigate("/profile")}
           >
             <img src={images.demo_profile_1} alt="" className="rounded-full" />
