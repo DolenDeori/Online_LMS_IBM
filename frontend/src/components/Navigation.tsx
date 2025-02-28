@@ -95,12 +95,19 @@ const Navigation = ({ isAuth }: { isAuth: boolean }) => {
 
         {isAuth ? (
           <button
-            className={`hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 overflow-hidden cursor-pointer ${
+            className={`hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 cursor-pointer relative ${
               location.pathname === "/profile" ? "border-2" : ""
             } `}
             onClick={() => navigate("/profile")}
+            onMouseEnter={() => setShowNavLink("profile")}
+            onMouseLeave={() => setShowNavLink(null)}
           >
             <img src={images.demo_profile_1} alt="" className="rounded-full" />
+            {showNavLink === "profile" && (
+              <span className="absolute left-13 top-1/2 -translate-y-1/2 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                Account
+              </span>
+            )}
           </button>
         ) : (
           ""
