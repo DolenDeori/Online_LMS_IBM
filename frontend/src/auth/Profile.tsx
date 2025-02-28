@@ -23,9 +23,6 @@ const Profile = () => {
     const userToken = localStorage.getItem("token");
     const storedUser = localStorage.getItem("user");
 
-    console.log("User Token:", userToken);
-    console.log("Stored User Data:", storedUser);
-
     if (!userToken || !storedUser) {
       navigate("/auth/signin"); // Redirect if user is not authenticated
       return;

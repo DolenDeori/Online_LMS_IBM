@@ -35,7 +35,6 @@ const SignIn = () => {
       if (response.ok) {
         localStorage.setItem("token", userResponse.data.token);
         localStorage.setItem("user", JSON.stringify(userResponse.data.user));
-        console.log(userResponse.data.user);
         alert("User signed in successfully!");
 
         // automatic redirect the user.

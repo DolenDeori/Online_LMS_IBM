@@ -1,9 +1,18 @@
 import { images } from "@/constants";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 
 const SearchNav = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem("user");
+    if (currentUser) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  });
   const navigate = useNavigate();
   return (
     <div className="p-4 px-8 z-10 flex justify-between items-center gap-2 sticky top-0 left-0 w-full bg-white font-funnel">
