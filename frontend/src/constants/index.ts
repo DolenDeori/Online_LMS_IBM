@@ -8,6 +8,7 @@ import action_books from "../assets/images/ActionBook.webp";
 import art_photography from "../assets/images/ArtPhotography.jpg";
 import mystry_books from "../assets/images/MystryBooks.webp";
 import thiller_books from "../assets/images/thillerBooks.avif";
+import romance from "../assets/images/RomanceBook.jpg";
 
 export const images = {
   logo,
@@ -20,6 +21,7 @@ export const images = {
   art_photography,
   mystry_books,
   thiller_books,
+  romance,
 };
 
 export const books = [

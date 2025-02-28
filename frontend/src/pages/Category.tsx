@@ -51,8 +51,13 @@ const Category = () => {
               Action and Adventure
             </p>
           </div>
-          <div className="bg-gray-400 h-[250px] rounded-xl hover:scale-95 duration-300 flex justify-center items-center cursor-pointer">
-            Romance
+          <div className="bg-black h-[250px] rounded-xl hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
+            <img
+              src={images.romance}
+              alt=""
+              className="opacity-70 h-full object-cover"
+            />
+            <p className="absolute text-white font-bold text-xl">Romance</p>
           </div>
           <div className="bg-black h-[250px] rounded-xl hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
             <img
