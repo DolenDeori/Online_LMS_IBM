@@ -38,17 +38,16 @@ const SignUp = () => {
         }
       );
 
-      const data = await response.json();
+      const userResponse = await response.json();
 
       if (response.ok) {
-        localStorage.setItem("token", data.token);
+        localStorage.setItem("token", userResponse.data.token);
+        localStorage.setItem("user", JSON.stringify(userResponse.data.user));
         alert("User registered successfully!");
-        console.log("data is", data);
-        console.log("use name is", data.user.name);
 
-        navigate("/auth/profile");
+        navigate("/profile");
       } else {
-        alert(data.message || "Error occurred!");
+        alert(userResponse.message || "Error occurred!");
       }
     } catch (error) {
       console.error("Error during signup:", error);
