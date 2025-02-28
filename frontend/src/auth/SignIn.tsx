@@ -30,18 +30,18 @@ const SignIn = () => {
         }
       );
 
-      const data = await response.json();
+      const userResponse = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("token", userResponse.data.token);
+        localStorage.setItem("user", JSON.stringify(userResponse.data.user));
+        console.log(userResponse.data.user);
         alert("User signed in successfully!");
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        console.log("response is : ", data);
 
         // automatic redirect the user.
         navigate("/auth/profile");
       } else {
-        alert(data.message || "Error occurred!");
+        alert(userResponse.message || "Error occurred!");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -97,7 +97,7 @@ const SignIn = () => {
 
         <button
           type="submit"
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
           className="cursor-pointer bg-blue-700 text-white p-2 px-8 rounded-md mt-5"
         >
           Sign In
