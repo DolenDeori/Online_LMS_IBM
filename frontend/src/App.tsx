@@ -9,6 +9,7 @@ import Saved from "./pages/Saved";
 import SearchNav from "./components/SearchNav";
 import Profile from "./pages/Profile";
 import ProtectedRoute from "./route/ProtectedRoute";
+import AdminHome from "./admin/Home";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/auth/signup" element={<SignUp />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile />} />
+            <Route path="/admin/home" element={<AdminHome />} />
           </Route>
         </Routes>
       </div>
