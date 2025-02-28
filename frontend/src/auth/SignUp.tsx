@@ -44,6 +44,8 @@ const SignUp = () => {
         localStorage.setItem("token", data.token);
         alert("User registered successfully!");
         console.log("data is", data);
+        console.log("use name is", data.user.name);
+
         navigate("/auth/profile");
       } else {
         alert(data.message || "Error occurred!");
