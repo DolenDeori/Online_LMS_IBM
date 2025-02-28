@@ -7,14 +7,14 @@ const Profile = () => {
   const [user, setUser] = useState<{ name: string; email: string } | null>(
     null
   );
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
-    } else {
-      navigate("/auth/signin");
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("user");
+  //   if (storedUser) {
+  //     setUser(JSON.parse(storedUser));
+  //   } else {
+  //     navigate("/auth/signin");
+  //   }
+  // }, [navigate]);
   return (
     <div className="flex h-svh">
       <div className="h-svh w-full flex-2 font-funnel">
