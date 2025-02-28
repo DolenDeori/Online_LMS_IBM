@@ -44,21 +44,21 @@ const Navigation = () => {
               </li>
               <li
                 className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
-                onMouseEnter={() => setShowNavLink("explore")}
+                onMouseEnter={() => setShowNavLink("category")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
                 <NavLink
-                  to="/home/explore"
+                  to="/home/category"
                   className="text-xs font-funnel font-semibold flex flex-col items-center justify-center gap-1"
                 >
                   <i
-                    className={`bi bi-compass${
-                      location.pathname === "/home/explore" ? "-fill" : ""
+                    className={`bi bi-grid${
+                      location.pathname === "/home/category" ? "-fill" : ""
                     } text-2xl`}
                   ></i>
-                  {showNavLink === "explore" && (
+                  {showNavLink === "category" && (
                     <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
-                      Explore
+                      Category
                     </span>
                   )}
                 </NavLink>
