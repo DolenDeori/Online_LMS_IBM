@@ -22,7 +22,7 @@ function App() {
         {!hideNavigation && <SearchNav />}
 
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<Home home_title="Our Book Collections" />} />
           <Route path="/home/category" element={<Category />} />
           <Route path="/home/saved" element={<Saved />} />
           <Route path="/home/books/:id" element={<BookInfo />} />

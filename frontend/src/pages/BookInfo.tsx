@@ -125,7 +125,7 @@ const BookInfo = () => {
         </div>
       </section>
       <section className="mt-8">
-        <Home />
+        <Home home_title="You my also like" />
       </section>
     </main>
   );
