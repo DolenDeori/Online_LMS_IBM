@@ -1,49 +1,89 @@
-import { books } from "@/constants";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import Home from "./Home";
 
+interface Book {
+  _id: string;
+  title: string;
+  author: string;
+  publishDate: string;
+  pages: number;
+  available: boolean;
+  starReview: number;
+  coverImage: string;
+}
+
 const BookInfo = () => {
   const { id } = useParams();
+  const [book, setBook] = useState<Book | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  const book = books.find((book) => book.id.toString() === id);
+  useEffect(() => {
+    fetch(`http://localhost:5500/api/v1/books/${id}`) 
+      .then((res) => res.json())
+      .then((data) => {
+        setBook(data.data); 
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching book details:", err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return <div className="text-center mt-4">Loading book details...</div>;
+  }
 
   if (!book) {
-    return <div>Book not found</div>;
+    return <div className="text-center mt-4">Book not found</div>;
   }
+
+  //  Convert publishDate to a readable format
+  const formattedDate = book.publishDate
+    ? new Date(book.publishDate).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "Unknown Date";
 
   return (
     <main>
-      {/* <SearchNav /> */}
       <section className="p-4 flex justify-center w-[50%]  m-auto items-center rounded-2xl font-funnel">
         <div className="lg:flex justify-center gap-8 w-full">
-          {" "}
           <div className="flex-1">
             <img
-              src={book.coverImage}
-              alt={`${book.title} - Book Cover Image`}
+              src={book.coverImage || "https://via.placeholder.com/200"}
+              alt={`${book.title || "Unknown"} - Book Cover Image`}
               className="rounded-xl"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://via.placeholder.com/200";
+              }}
             />
           </div>
           <div className="flex-1 flex flex-col justify-between gap-4 p-2">
             <div className="flex flex-col h-full gap-8">
-              {/* Section 1 */}
+              {/* Book Title and Author */}
               <div>
-                {" "}
-                <h1 className="text-3xl font-bold">{book.title}</h1>
-                <h2>{book.author}</h2>
+                <h1 className="text-3xl font-bold">{book.title || "Unknown Title"}</h1>
+                <h2>{book.author || "Unknown Author"}</h2>
               </div>
 
-              {/* Section 2 */}
+              {/* Book Details */}
               <div>
                 <p className="text-sm text-gray-500">
-                  {book.publishDate} • Dolen Deori Publications
+                  {formattedDate} • Dolen Deori Publications
                 </p>
                 <div className="flex gap-2 justify-between items-center mt-4">
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center">
-                      {" "}
-                      <p> {book.starReview}</p>
-                      <i className="bi bi-star-fill text-xs"></i>
+                      <p>{book.starReview ? book.starReview.toFixed(2) : "N/A"}</p>
+                      {book.starReview !== undefined ? (
+                        <i className="bi bi-star-fill text-xs text-yellow-500"></i>
+                      ) : (
+                        <p className="text-xs text-gray-500">No Rating</p>
+                      )}
                     </div>
                     <p className="text-xs text-gray-500">Rating</p>
                   </div>
@@ -52,11 +92,11 @@ const BookInfo = () => {
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex items-center justify-center">
-                      {" "}
                       <p
-                        className={`${book.available ? "text-green-500" : ""}`}
+                        className={`${
+                          book.available ? "text-green-500" : "text-red-500"
+                        }`}
                       >
-                        {" "}
                         {book.available ? "Available" : "Not Available"}
                       </p>
                     </div>
@@ -67,32 +107,20 @@ const BookInfo = () => {
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center">
-                      {" "}
-                      <p> {book.pages}</p>
+                      <p>{book.pages || "N/A"}</p>
                     </div>
                     <p className="text-xs text-gray-500">Pages</p>
                   </div>
                 </div>
               </div>
-              {/* Section 3 */}
+
+              {/* About the Book */}
               <div>
                 <h1 className="flex items-center gap-4 cursor-pointer text-xl font-bold">
                   About this book <i className="bi bi-arrow-right"></i>
                 </h1>
-                <p className=" line-clamp-4 mt-2">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id
-                  quia labore, atque animi mollitia magni ducimus, praesentium
-                  laborum corporis odio commodi nemo, tenetur eveniet facere
-                  architecto illum vero dolorum autem quaerat minima nobis!
-                  Minima commodi quasi natus eum maxime rem dignissimos harum
-                  similique! Ipsa veritatis ea quaerat rem magnam sequi odio
-                  aperiam dignissimos excepturi ut qui cum ullam adipisci fugiat
-                  expedita architecto rerum natus, quae itaque ab aliquam.
-                  Impedit doloribus harum odit aliquid, tenetur rem iure
-                  eligendi debitis nam nostrum soluta dolorem numquam eos error.
-                  Corporis repellat incidunt doloremque nostrum! Excepturi,
-                  provident delectus fuga quas et recusandae consequuntur sint
-                  ex?
+                <p className="line-clamp-4 mt-2">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit...
                 </p>
               </div>
             </div>
