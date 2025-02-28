@@ -1,9 +1,10 @@
 import { images } from "@/constants";
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 
-const Navigation = () => {
+const Navigation = ({ isAuth }: { isAuth: boolean }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [showNavLink, setShowNavLink] = useState<string | null>(null);
   return (
     <header>
@@ -63,43 +64,45 @@ const Navigation = () => {
                   )}
                 </NavLink>
               </li>
-              <li
-                className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
-                onMouseEnter={() => setShowNavLink("saved")}
-                onMouseLeave={() => setShowNavLink(null)}
-              >
-                <NavLink
-                  to="/home/saved"
-                  className="text-xs font-funnel font-semibold flex flex-col items-center justify-center gap-1"
+              {isAuth ? (
+                <li
+                  className="hover:bg-gray-200 h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer"
+                  onMouseEnter={() => setShowNavLink("saved")}
+                  onMouseLeave={() => setShowNavLink(null)}
                 >
-                  <i
-                    className={`bi bi-bookmark${
-                      location.pathname === "/home/saved" ? "-fill" : ""
-                    } text-2xl`}
-                  ></i>
-                  {showNavLink === "saved" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
-                      Saved
-                    </span>
-                  )}
-                </NavLink>
-              </li>
+                  <NavLink
+                    to="/home/saved"
+                    className="text-xs font-funnel font-semibold flex flex-col items-center justify-center gap-1"
+                  >
+                    <i
+                      className={`bi bi-bookmark${
+                        location.pathname === "/home/saved" ? "-fill" : ""
+                      } text-2xl`}
+                    ></i>
+                    {showNavLink === "saved" && (
+                      <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                        Saved
+                      </span>
+                    )}
+                  </NavLink>
+                </li>
+              ) : (
+                " "
+              )}
             </ul>
           </div>
         </div>
 
-        {/* <div>
-          <ul className="flex flex-col gap-8">
-            <li>
-              <NavLink
-                to="/auth/signin"
-                className="text-xs font-semibold flex flex-col items-center justify-center gap-1"
-              >
-                <i className="bi bi-box-arrow-in-right text-2xl"></i>
-              </NavLink>
-            </li>
-          </ul>
-        </div> */}
+        {isAuth ? (
+          <button
+            className="hover:bg-gray-200 rounded-xl p-1.5 h-12 w-12 overflow-hidden cursor-pointer"
+            onClick={() => navigate("/profile")}
+          >
+            <img src={images.demo_profile_1} alt="" className="rounded-full" />
+          </button>
+        ) : (
+          ""
+        )}
       </nav>
       {/* ------------ navigation bar end ------------------- */}
     </header>

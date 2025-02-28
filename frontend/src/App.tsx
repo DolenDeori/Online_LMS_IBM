@@ -7,19 +7,30 @@ import SignUp from "./auth/SignUp";
 import Category from "./pages/Category";
 import Saved from "./pages/Saved";
 import SearchNav from "./components/SearchNav";
-import Profile from "./auth/Profile";
+import Profile from "./pages/Profile";
 import ProtectedRoute from "./route/ProtectedRoute";
+import { useEffect, useState } from "react";
 
 function App() {
   const location = useLocation();
 
   const hideNavigation = location.pathname.startsWith("/auth");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const currentUser = localStorage.getItem("user");
+    if (currentUser) {
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+  });
 
   return (
     <div className="flex h-screen">
-      {!hideNavigation && <Navigation />}
+      {!hideNavigation && <Navigation isAuth={isAuthenticated} />}
       <div className="flex-1 relative overflow-y-scroll">
-        {!hideNavigation && <SearchNav />}
+        {!hideNavigation && <SearchNav isAuth={isAuthenticated} />}
 
         <Routes>
           <Route index element={<Home home_title="Our Book Collections" />} />
@@ -29,7 +40,7 @@ function App() {
           <Route path="/auth/signin" element={<SignIn />} />
           <Route path="/auth/signup" element={<SignUp />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/auth/profile" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Routes>
       </div>

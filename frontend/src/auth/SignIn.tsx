@@ -38,7 +38,7 @@ const SignIn = () => {
         alert("User signed in successfully!");
 
         // automatic redirect the user.
-        navigate("/auth/profile");
+        navigate("/profile");
       } else {
         alert(userResponse.message || "Error occurred!");
       }
