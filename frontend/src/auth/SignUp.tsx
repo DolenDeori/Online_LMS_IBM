@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom"; // Fix import for NavLink
+import { useNavigate, NavLink } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -40,12 +41,16 @@ const SignUp = () => {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("token", data.token);
         alert("User registered successfully!");
+        console.log("data is", data);
+        navigate("/auth/profile");
       } else {
         alert(data.message || "Error occurred!");
       }
     } catch (error) {
-      console.error("Error:", error);
+      console.error("Error during signup:", error);
+      alert("Something went wrong. Please try again later.");
     }
   };
 

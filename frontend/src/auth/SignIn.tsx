@@ -35,8 +35,11 @@ const SignIn = () => {
       if (response.ok) {
         alert("User signed in successfully!");
         localStorage.setItem("token", data.token);
-        console.log("token data", data.token);
-        
+        localStorage.setItem("user", JSON.stringify(data.user));
+        console.log(JSON.stringify(data.user));
+        console.log(data);
+        console.log(data.user);
+
         // automatic redirect the user.
         navigate("/auth/profile");
       } else {
