@@ -14,13 +14,13 @@ const SearchNav = () => {
       <div className="flex gap-1">
         <NavLink
           to="/auth/signup"
-          className="p-2.5 bg-white text-blue-700 rounded-l-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
+          className="p-2.5 bg-white text-sm text-blue-700 rounded-l-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
         >
           Sign Up
         </NavLink>
         <NavLink
           to="/auth/signin"
-          className="p-2.5 bg-white text-blue-700 rounded-r-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
+          className="p-2.5 bg-white text-sm text-blue-700 rounded-r-xl border-2 border-blue-700 hover:bg-blue-700 hover:text-white duration-200"
         >
           Sign In
         </NavLink>

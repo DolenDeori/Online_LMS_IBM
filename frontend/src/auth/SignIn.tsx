@@ -36,9 +36,7 @@ const SignIn = () => {
         alert("User signed in successfully!");
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        console.log(JSON.stringify(data.user));
-        console.log(data);
-        console.log(data.user);
+        console.log("response is : ", data);
 
         // automatic redirect the user.
         navigate("/auth/profile");

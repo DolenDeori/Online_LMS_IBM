@@ -32,7 +32,7 @@ const Home = () => {
     <>
       <main className="h-svh font-funnel">
         <section className="p-4">
-          <h1 className="text-xl font-semibold">Our Book Collections</h1>
+          <h1 className="text-xl font-semibold">{home_title}</h1>
 
           <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-12 mt-5 mb-5">
             {books.length > 0 ? (

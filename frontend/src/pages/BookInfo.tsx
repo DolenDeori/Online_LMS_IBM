@@ -14,6 +14,8 @@ interface Book {
 }
 
 const BookInfo = () => {
+  const [showNavLink, setShowNavLink] = useState<string | null>(null);
+  const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
@@ -88,7 +90,7 @@ const BookInfo = () => {
                     <p className="text-xs text-gray-500">Rating</p>
                   </div>
 
-                  <div className="h-6 w-[1px] bg-gray-300"></div>
+                    <div className="h-6 w-[1px] bg-gray-300"></div>
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex items-center justify-center">
@@ -103,7 +105,7 @@ const BookInfo = () => {
                     <p className="text-xs text-gray-500">Availability</p>
                   </div>
 
-                  <div className="h-6 w-[1px] bg-gray-300"></div>
+                    <div className="h-6 w-[1px] bg-gray-300"></div>
 
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center">
@@ -131,7 +133,7 @@ const BookInfo = () => {
         </div>
       </section>
       <section className="mt-8">
-        <Home />
+        <Home home_title="You my also like" />
       </section>
     </main>
   );
