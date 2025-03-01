@@ -37,7 +37,7 @@ const Home = ({
       <main className={` h-svh font-funnel`}>
         <section
           className={`p-4 ${
-            darkMode ? "bg-gray-900" : "bg-white"
+            darkMode ? "bg-gray-950" : "bg-white"
           } duration-200`}
         >
           <h1
