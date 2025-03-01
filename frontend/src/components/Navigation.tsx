@@ -18,10 +18,14 @@ const Navigation = ({
       <nav
         className={`${
           darkMode ? "bg-gray-900 border-gray-500" : "bg-white border-gray-300"
-        } py-8 px-2 lg:px-4 border-r  h-svh flex flex-col justify-between items-center font-funnel z-100 duration-200`}
+        } flex fixed p-2 w-full bottom-0 md:w-fit md:py-8 md:px-2 lg:px-4 md:static md:border-r md:h-svh md:flex-col md:justify-between md:items-center font-funnel z-100 duration-200`}
       >
-        <div>
-          <NavLink to="/" className="flex items-center justify-center" end>
+        <div className="flex w-full md:w-fit md:flex-col ">
+          <NavLink
+            to="/"
+            className="h-12 w-12 md:flex md:items-center md:justify-center"
+            end
+          >
             <img
               src={images.logo_icon_white}
               alt="image logo"
@@ -29,12 +33,12 @@ const Navigation = ({
             />
           </NavLink>
 
-          <div className="mt-8">
-            <ul className="flex flex-col justify-center items-center gap-y-8">
+          <div className="w-full flex justify-center items-center md:w-fit md:mt-8">
+            <ul className="flex gap-x-2 md:flex-col md:justify-center md:items-center md:gap-y-8">
               <li
                 className={`${
                   darkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer`}
+                } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer relative`}
                 onMouseEnter={() => setShowNavLink("home")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
@@ -56,7 +60,7 @@ const Navigation = ({
                         darkMode
                           ? "bg-gray-200 text-black"
                           : "bg-gray-900 text-white "
-                      } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                      } hidden  absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                     >
                       Home
                     </span>
@@ -66,7 +70,7 @@ const Navigation = ({
               <li
                 className={`${
                   darkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer`}
+                } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer relative`}
                 onMouseEnter={() => setShowNavLink("category")}
                 onMouseLeave={() => setShowNavLink(null)}
               >
@@ -87,7 +91,7 @@ const Navigation = ({
                         darkMode
                           ? "bg-gray-200 text-black"
                           : "bg-gray-900 text-white "
-                      } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                      } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                     >
                       Category
                     </span>
@@ -98,7 +102,7 @@ const Navigation = ({
                 <li
                   className={`${
                     darkMode ? "hover:bg-gray-600" : "hover:bg-gray-200"
-                  } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer`}
+                  } h-12 w-12 flex justify-center items-center rounded-xl cursor-pointer relative`}
                   onMouseEnter={() => setShowNavLink("saved")}
                   onMouseLeave={() => setShowNavLink(null)}
                 >
@@ -119,7 +123,7 @@ const Navigation = ({
                           darkMode
                             ? "bg-gray-200 text-black"
                             : "bg-gray-900 text-white "
-                        } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                        } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                       >
                         Saved
                       </span>
