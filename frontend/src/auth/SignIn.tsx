@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from "react-router";
 import { useState } from "react";
 
-const SignIn = () => {
+const SignIn = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -48,7 +48,11 @@ const SignIn = () => {
   };
 
   return (
-    <div className="h-svh w-full flex flex-col justify-center items-center font-funnel">
+    <div
+      className={`${
+        darkMode ? "bg-gray-950 text-white" : "bg-white"
+      } h-svh w-full flex flex-col justify-center items-center font-funnel`}
+    >
       <p className="absolute top-4 left-4">
         <NavLink to="/" end>
           <i className="bi bi-caret-left-fill"></i>
