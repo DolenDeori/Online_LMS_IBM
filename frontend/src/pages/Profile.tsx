@@ -13,7 +13,7 @@ interface Book {
   author: string;
 }
 
-const Profile = () => {
+const Profile = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [books, setBooks] = useState<Book[]>([]);
@@ -24,15 +24,15 @@ const Profile = () => {
     const storedUser = localStorage.getItem("user");
 
     if (!userToken || !storedUser) {
-      navigate("/auth/signin"); // Redirect if user is not authenticated
+      navigate("/auth/signin");
       return;
     }
 
     try {
-      setUser(JSON.parse(storedUser)); // Parse user data correctly
+      setUser(JSON.parse(storedUser));
     } catch (error) {
       console.error("Error parsing user data:", error);
-      navigate("/auth/signin"); // Redirect if user data is corrupted
+      navigate("/auth/signin");
     }
   }, [navigate]);
 
@@ -60,7 +60,11 @@ const Profile = () => {
     navigate("/auth/signin");
   };
   return (
-    <div className="flex h-svh">
+    <div
+      className={`${
+        darkMode ? "bg-gray-950 text-white" : "bg-white text-black"
+      } flex h-svh duration-200`}
+    >
       <div className="h-svh w-full flex-2 font-funnel">
         <div className="flex flex-col items-center pb-8">
           <div className="border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
