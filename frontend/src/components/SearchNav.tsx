@@ -14,7 +14,7 @@ const SearchNav = ({
   const [showNavLink, setShowNavLink] = useState<string | null>(null);
   return (
     <div
-      className={`p-4 px-8 z-10 flex justify-center items-center gap-2 sticky top-0 left-0 w-full duration-200 ${
+      className={`p-4 px-4 md:px-8 z-10 flex justify-center items-center gap-2 fixed md:sticky top-0 left-0 w-full duration-200 ${
         darkMode ? "bg-gray-900" : "bg-white "
       } font-funnel`}
     >
