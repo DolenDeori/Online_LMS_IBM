@@ -35,10 +35,16 @@ const SignIn = ({ darkMode }: { darkMode: boolean }) => {
       if (response.ok) {
         localStorage.setItem("token", userResponse.data.token);
         localStorage.setItem("user", JSON.stringify(userResponse.data.user));
+        const lastAttemptedUrl = localStorage.getItem("lastAttemptedUrl");
         alert("User signed in successfully!");
 
         // automatic redirect the user.
-        navigate("/profile");
+        if (lastAttemptedUrl) {
+          navigate(lastAttemptedUrl);
+          localStorage.removeItem("lastAttemptedUrl");
+        } else {
+          navigate("/profile");
+        }
       } else {
         alert(userResponse.message || "Error occurred!");
       }

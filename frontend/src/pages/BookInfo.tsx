@@ -49,6 +49,15 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       })
     : "Unknown Date";
 
+  const handleBookBorrow = () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      localStorage.setItem("lastAttemptedUrl", location.pathname);
+      navigate("/auth/signin");
+    } else {
+      alert("book is borrowed");
+    }
+  };
   return (
     <main
       className={`${darkMode ? "bg-gray-950" : "bg-white"} py-8 duration-200`}
@@ -168,7 +177,10 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
               </div>
             </div>
             <div className="flex gap-0.5  ">
-              <button className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer">
+              <button
+                className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer"
+                onClick={handleBookBorrow}
+              >
                 Borrow Book
               </button>
               <button className="bg-blue-800 text-white px-4 rounded-r-3xl rounded-l-sm cursor-pointer">
