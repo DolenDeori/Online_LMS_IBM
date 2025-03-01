@@ -11,9 +11,11 @@ import Profile from "./pages/Profile";
 import ProtectedRoute from "./route/ProtectedRoute";
 import AdminHome from "./admin/Home";
 import { useEffect, useState } from "react";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const hideNavigation = location.pathname.startsWith("/auth");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -29,20 +31,43 @@ function App() {
 
   return (
     <div className="flex h-screen">
-      {!hideNavigation && <Navigation isAuth={isAuthenticated} />}
+      {!hideNavigation && (
+        <Navigation isAuth={isAuthenticated} darkMode={darkMode} />
+      )}
       <div className="flex-1 relative overflow-y-scroll">
-        {!hideNavigation && <SearchNav isAuth={isAuthenticated} />}
+        {!hideNavigation && (
+          <SearchNav
+            isAuth={isAuthenticated}
+            darkMode={darkMode}
+            setDarkMode={setDarkMode}
+          />
+        )}
 
+        <ScrollToTop />
         <Routes>
-          <Route index element={<Home home_title="Our Book Collections" />} />
-          <Route path="/home/category" element={<Category />} />
-          <Route path="/home/saved" element={<Saved />} />
-          <Route path="/home/books/:id" element={<BookInfo />} />
-          <Route path="/auth/signin" element={<SignIn />} />
-          <Route path="/auth/signup" element={<SignUp />} />
+          <Route
+            index
+            element={
+              <Home home_title="Our Book Collections" darkMode={darkMode} />
+            }
+          />
+          <Route
+            path="/home/category"
+            element={<Category darkMode={darkMode} />}
+          />
+          <Route path="/home/saved" element={<Saved darkMode={darkMode} />} />
+          <Route
+            path="/home/books/:id"
+            element={<BookInfo darkMode={darkMode} />}
+          />
+          <Route path="/auth/signin" element={<SignIn darkMode={darkMode} />} />
+          <Route path="/auth/signup" element={<SignUp darkMode={darkMode} />} />
           <Route element={<ProtectedRoute />}>
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin/home" element={<AdminHome />} />
+            <Route path="/profile" element={<Profile darkMode={darkMode} />} />
+            <Route
+              path="/admin/home"
+              element={<AdminHome darkMode={darkMode} />}
+            />
           </Route>
         </Routes>
       </div>
