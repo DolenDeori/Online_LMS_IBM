@@ -51,7 +51,13 @@ const Navigation = ({
                   ></i>
 
                   {showNavLink === "home" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                    <span
+                      className={`${
+                        darkMode
+                          ? "bg-gray-200 text-black"
+                          : "bg-gray-900 text-white "
+                      } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                    >
                       Home
                     </span>
                   )}
@@ -76,7 +82,13 @@ const Navigation = ({
                     } text-2xl`}
                   ></i>
                   {showNavLink === "category" && (
-                    <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                    <span
+                      className={`${
+                        darkMode
+                          ? "bg-gray-200 text-black"
+                          : "bg-gray-900 text-white "
+                      } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                    >
                       Category
                     </span>
                   )}
@@ -102,7 +114,13 @@ const Navigation = ({
                       } text-2xl`}
                     ></i>
                     {showNavLink === "saved" && (
-                      <span className="absolute left-17 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+                      <span
+                        className={`${
+                          darkMode
+                            ? "bg-gray-200 text-black"
+                            : "bg-gray-900 text-white "
+                        } absolute left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                      >
                         Saved
                       </span>
                     )}
@@ -130,7 +148,11 @@ const Navigation = ({
           >
             <img src={images.demo_profile_1} alt="" className="rounded-full" />
             {showNavLink === "profile" && (
-              <span className="absolute left-13 top-1/2 -translate-y-1/2 bg-gray-900 font-funnel font-normal text-white text-sm px-2 py-1 rounded-xl z-1">
+              <span
+                className={`${
+                  darkMode ? "bg-gray-200 text-black" : "bg-gray-900 text-white"
+                } absolute left-13 top-1/2 -translate-y-1/2 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+              >
                 Account
               </span>
             )}
