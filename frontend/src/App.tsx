@@ -29,6 +29,21 @@ function App() {
     }
   });
 
+  // Dyanmic title updation in every page
+  useEffect(() => {
+    const titles: Record<string, string> = {
+      "/": "Home - Book Library",
+      "/home/category": "Categories - Book Library",
+      "/home/saved": "Saved Books - Book Library",
+      "/auth/signin": "Sign In - Book Library",
+      "/auth/signup": "Sign Up - Book Library",
+      "/profile": "Profile - Book Library",
+      "/admin/home": "Admin Dashboard - Book Library",
+    };
+
+    document.title = titles[location.pathname] || "Book Library";
+  }, [location.pathname]);
+
   return (
     <div className="flex h-screen">
       {!hideNavigation && (
