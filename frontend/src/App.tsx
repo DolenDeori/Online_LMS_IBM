@@ -56,7 +56,7 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="flex h-screen">
+    <div className="md:flex h-screen">
       {!hideNavigation && (
         <Navigation isAuth={isAuthenticated} darkMode={darkMode} />
       )}
