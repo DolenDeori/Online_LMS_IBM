@@ -12,7 +12,13 @@ interface Book {
   coverImage: string;
 }
 
-const Home = ({ home_title }: { home_title: string }) => {
+const Home = ({
+  home_title,
+  darkMode,
+}: {
+  home_title: string;
+  darkMode: boolean;
+}) => {
   const navigate = useNavigate();
   const [books, setBooks] = useState<Book[]>([]);
 
@@ -28,9 +34,19 @@ const Home = ({ home_title }: { home_title: string }) => {
 
   return (
     <>
-      <main className="h-svh font-funnel">
-        <section className="p-4">
-          <h1 className="text-xl font-semibold">{home_title}</h1>
+      <main className={` h-svh font-funnel`}>
+        <section
+          className={`p-4 ${
+            darkMode ? "bg-gray-900" : "bg-white"
+          } duration-200`}
+        >
+          <h1
+            className={`${
+              darkMode ? "text-white" : "text-black"
+            } text-xl font-semibold`}
+          >
+            {home_title}
+          </h1>
 
           <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-8 mt-5 mb-5">
             {books.length > 0 ? (
@@ -48,8 +64,16 @@ const Home = ({ home_title }: { home_title: string }) => {
                     />
                   </div>
                   <div>
-                    <h2 className="text-gray-800">{book.title}</h2>
-                    <p className="flex items-center gap-1 text-sm text-gray-600">
+                    <h2
+                      className={`${darkMode ? "text-white" : "text-gray-800"}`}
+                    >
+                      {book.title}
+                    </h2>
+                    <p
+                      className={`flex items-center gap-1 text-sm ${
+                        darkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    >
                       {book.starReview}{" "}
                       <i className="bi bi-star-fill text-xs"></i>
                     </p>
