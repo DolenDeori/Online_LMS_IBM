@@ -13,8 +13,7 @@ interface Book {
   coverImage: string;
 }
 
-const BookInfo = () => {
-  const [showNavLink, setShowNavLink] = useState<string | null>(null);
+const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);
@@ -51,20 +50,32 @@ const BookInfo = () => {
     : "Unknown Date";
 
   return (
-    <main>
+    <main
+      className={`${darkMode ? "bg-gray-950" : "bg-white"} py-8 duration-200`}
+    >
       <section className="p-4 flex justify-center w-[50%] gap-4 m-auto rounded-2xl font-funnel">
         <button
           onClick={() => navigate("/")}
-          className="hover:bg-gray-200 h-12 w-13 rounded-full flex justify-center items-center cursor-pointer duration-200"
+          className={` ${
+            darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+          } h-12 w-13 rounded-full flex justify-center items-center cursor-pointer duration-200`}
         >
-          <i className="bi bi-arrow-left text-xl"></i>
+          <i
+            className={`${
+              darkMode ? "text-white" : "text-black"
+            } bi bi-arrow-left text-xl`}
+          ></i>
         </button>
-        <div className="lg:flex justify-center gap-8 w-full">
+        <div
+          className={`${
+            darkMode ? "bg-gray-800" : "bg-gray-100"
+          } lg:flex justify-center gap-8 w-full  p-2 rounded-2xl duration-200`}
+        >
           <div className="flex-1">
             <img
               src={book.coverImage || "https://via.placeholder.com/200"}
               alt={`${book.title || "Unknown"} - Book Cover Image`}
-              className="rounded-xl"
+              className="rounded-xl h-full"
               onError={(e) => {
                 (e.target as HTMLImageElement).src =
                   "https://via.placeholder.com/200";
@@ -75,10 +86,16 @@ const BookInfo = () => {
             <div className="flex flex-col h-full gap-8">
               {/* Book Title and Author */}
               <div>
-                <h1 className="text-3xl font-bold">
+                <h1
+                  className={`${
+                    darkMode ? "text-white" : "text-black"
+                  } text-3xl font-bold`}
+                >
                   {book.title || "Unknown Title"}
                 </h1>
-                <h2>{book.author || "Unknown Author"}</h2>
+                <h2 className={`${darkMode ? "text-white" : "text-black"}`}>
+                  {book.author || "Unknown Author"}
+                </h2>
               </div>
 
               {/* Book Details */}
@@ -89,7 +106,9 @@ const BookInfo = () => {
                 <div className="flex gap-2 justify-between items-center mt-4">
                   <div className="flex-col justify-between items-center gap-1">
                     <div className="flex gap-1 items-center justify-center text-center">
-                      <p>
+                      <p
+                        className={`${darkMode ? "text-white" : "text-black"}`}
+                      >
                         {book.starReview ? book.starReview.toFixed(2) : "N/A"}
                       </p>
                       {book.starReview !== undefined ? (
@@ -117,7 +136,9 @@ const BookInfo = () => {
                   <div className="h-6 w-[1px] bg-gray-300"></div>
 
                   <div className="flex-col justify-between items-center gap-1 text-center">
-                    <p>{book.pages || "N/A"}</p>
+                    <p className={`${darkMode ? "text-white" : "text-black"}`}>
+                      {book.pages || "N/A"}
+                    </p>
                     <p className="text-xs text-gray-500">Pages</p>
                   </div>
                 </div>
@@ -125,11 +146,24 @@ const BookInfo = () => {
 
               {/* About the Book */}
               <div>
-                <h1 className="flex items-center gap-4 cursor-pointer text-xl font-bold">
+                <h1
+                  className={`${
+                    darkMode
+                      ? "text-white font-semibold"
+                      : "text-black font-bold"
+                  } flex items-center gap-4 cursor-pointer text-xl`}
+                >
                   About this book <i className="bi bi-arrow-right"></i>
                 </h1>
-                <p className="line-clamp-4 mt-2">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit...
+                <p
+                  className={`${
+                    darkMode ? "text-white" : "text-black"
+                  } line-clamp-3 mt-2`}
+                >
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Adipisci minus possimus nihil temporibus explicabo, quis
+                  facilis ducimus inventore fugit iste beatae neque consequatur
+                  vel architecto voluptates ex
                 </p>
               </div>
             </div>
@@ -145,7 +179,7 @@ const BookInfo = () => {
         </div>
       </section>
       <section className="mt-8">
-        <Home home_title="You may also like" />
+        <Home home_title="You may also like" darkMode={darkMode} />
       </section>
     </main>
   );
