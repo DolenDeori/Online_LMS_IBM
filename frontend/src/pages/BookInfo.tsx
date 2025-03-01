@@ -88,7 +88,7 @@ const BookInfo = () => {
                 </p>
                 <div className="flex gap-2 justify-between items-center mt-4">
                   <div className="flex-col justify-between items-center gap-1">
-                    <div className="flex gap-1 items-center justify-center">
+                    <div className="flex gap-1 items-center justify-center text-center">
                       <p>
                         {book.starReview ? book.starReview.toFixed(2) : "N/A"}
                       </p>
@@ -103,25 +103,21 @@ const BookInfo = () => {
 
                   <div className="h-6 w-[1px] bg-gray-300"></div>
 
-                  <div className="flex-col justify-between items-center gap-1">
-                    <div className="flex items-center justify-center">
-                      <p
-                        className={`${
-                          book.available ? "text-green-500" : "text-red-500"
-                        }`}
-                      >
-                        {book.available ? "Available" : "Not Available"}
-                      </p>
-                    </div>
+                  <div className="flex-col justify-between items-center gap-1 text-center">
+                    <p
+                      className={`${
+                        book.available ? "text-green-500" : "text-red-500"
+                      }`}
+                    >
+                      {book.available ? "Available" : "Not Available"}
+                    </p>
                     <p className="text-xs text-gray-500">Availability</p>
                   </div>
 
                   <div className="h-6 w-[1px] bg-gray-300"></div>
 
-                  <div className="flex-col justify-between items-center gap-1">
-                    <div className="flex gap-1 items-center justify-center">
-                      <p>{book.pages || "N/A"}</p>
-                    </div>
+                  <div className="flex-col justify-between items-center gap-1 text-center">
+                    <p>{book.pages || "N/A"}</p>
                     <p className="text-xs text-gray-500">Pages</p>
                   </div>
                 </div>
