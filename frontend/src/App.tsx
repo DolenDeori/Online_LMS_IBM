@@ -44,6 +44,17 @@ function App() {
     document.title = titles[location.pathname] || "Book Library";
   }, [location.pathname]);
 
+  // Apply darkmode to the main body
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("bg-gray-950");
+      document.body.classList.remove("bg-white");
+    } else {
+      document.body.classList.add("bg-white");
+      document.body.classList.remove("bg-gray-950");
+    }
+  }, [darkMode]);
+
   return (
     <div className="flex h-screen">
       {!hideNavigation && (
