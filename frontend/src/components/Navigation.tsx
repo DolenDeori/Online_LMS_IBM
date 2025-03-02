@@ -60,7 +60,7 @@ const Navigation = ({
                         darkMode
                           ? "bg-gray-200 text-black"
                           : "bg-gray-900 text-white "
-                      } hidden  absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                      } hidden  absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-14 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                     >
                       Home
                     </span>
@@ -91,7 +91,7 @@ const Navigation = ({
                         darkMode
                           ? "bg-gray-200 text-black"
                           : "bg-gray-900 text-white "
-                      } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                      } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-14 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                     >
                       Category
                     </span>
@@ -123,7 +123,7 @@ const Navigation = ({
                           darkMode
                             ? "bg-gray-200 text-black"
                             : "bg-gray-900 text-white "
-                        } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-17 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
+                        } hidden absolute md:block md:left-12 md:top-1/2 md:-translate-y-1/2 lg:left-14 font-funnel font-normal text-sm px-2 py-1 rounded-xl z-1`}
                       >
                         Saved
                       </span>
