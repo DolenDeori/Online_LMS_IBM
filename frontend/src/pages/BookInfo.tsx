@@ -49,42 +49,41 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       })
     : "Unknown Date";
 
-    const handleBookBorrow = () => {
-      const token = localStorage.getItem("token");
-      const user = JSON.parse(localStorage.getItem("user") || "{}");
-    
-      if (!token) {
-        localStorage.setItem("lastAttemptedUrl", location.pathname);
-        navigate("/auth/signin");
-        return;
-      }
-    
-      fetch("http://localhost:5500/api/v1/books/borrow", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          user_id: user._id,
-          book_id: book?._id,
-        }),
+  const handleBookBorrow = () => {
+    const token = localStorage.getItem("token");
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+    if (!token) {
+      localStorage.setItem("lastAttemptedUrl", location.pathname);
+      navigate("/auth/signin");
+      return;
+    }
+
+    fetch("http://localhost:5500/api/v1/books/borrow", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        user_id: user._id,
+        book_id: book?._id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.message === "Book borrowed successfully") {
+          alert("Book borrowed successfully!");
+          navigate("/profile"); // Redirect to profile after borrowing
+        } else {
+          alert(data.message);
+        }
       })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.message === "Book borrowed successfully") {
-            alert("Book borrowed successfully!");
-            navigate("/profile"); // Redirect to profile after borrowing
-          } else {
-            alert(data.message);
-          }
-        })
-        .catch((error) => {
-          console.error("Error borrowing book:", error);
-          alert("Failed to borrow book. Try again.");
-        });
-    };
-    
+      .catch((error) => {
+        console.error("Error borrowing book:", error);
+        alert("Failed to borrow book. Try again.");
+      });
+  };
 
   const handleBackButton = () => {
     const lastVisitedUrl = localStorage.getItem("lastVisitedUrl");
