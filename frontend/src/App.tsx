@@ -15,11 +15,19 @@ import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-
   const hideNavigation = location.pathname.startsWith("/auth");
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    return JSON.parse(localStorage.getItem("darkMode") || "false");
+  });
+
+  // Making sure dark mode remain even after the page is reloaded
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  // Checking if there is any user is Authenticated
   useEffect(() => {
     const currentUser = localStorage.getItem("user");
     if (currentUser) {

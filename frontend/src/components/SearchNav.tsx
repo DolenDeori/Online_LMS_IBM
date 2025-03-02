@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import DarkMode from "./DarkMode";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const SearchNav = ({
   isAuth,
