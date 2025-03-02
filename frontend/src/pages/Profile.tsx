@@ -83,7 +83,7 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
             {" "}
             <button
               className="p-2 bg-blue-800 mt-5 ml-4 rounded-full px-4 text-white cursor-pointer"
-              onClick={handleLogout}
+              // onClick={handleLogout}
             >
               Edit Profile
             </button>
@@ -101,12 +101,16 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
 
           <div
             className={`${
-              darkMode ? "bg-gray-900" : "bg-gray-100"
-            } mt-3 width-full overflow-x-scroll duration-200 scrollbar-hidden `}
+              darkMode ? "bg-gray-950" : "bg-white"
+            } mt-3 width-full h-[40vh] overflow-scroll duration-200 scrollbar-hidden rounded-xl relative`}
           >
             {
               <table className="table-auto border-collapse w-full rounded-2xl">
-                <thead>
+                <thead
+                  className={`${
+                    darkMode ? "bg-gray-800" : "bg-gray-200"
+                  } sticky top-0`}
+                >
                   <tr>
                     <th className=" py-4 p-2">Book Id</th>
                     <th className=" py-4 p-2">Books</th>
@@ -114,12 +118,12 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                     <th className=" py-4 p-2">Read Book</th>
                   </tr>
                 </thead>
-                <tbody className="border-t border-gray-600">
+                <tbody>
                   {books.map((book, index) => (
                     <tr
                       className={`${
                         darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                      } `}
+                      }`}
                       key={book._id}
                     >
                       <td className="p-2 text-center">{index + 1}</td>
@@ -135,7 +139,7 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                       <td className="p-2 text-center">
                         <button
                           onClick={() => handleBookRead(book._id)}
-                          className=" p-1 px-2 bg-blue-900 text-white cursor-pointer rounded-sm"
+                          className=" p-1 px-4 bg-blend-lighten bg-blue-800 text-white cursor-pointer rounded-full"
                         >
                           Read
                         </button>
