@@ -11,9 +11,13 @@ import borrowRouter from "./routes/borrow.routes.js";
 
 const app = express();
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://102a-152-59-148-5.ngrok-free.app",
+];
 //Middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 //in-built express middlewares
 app.use(express.json()); // Ensure JSON parsing is enabled

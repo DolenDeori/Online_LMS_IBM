@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 
 //create the borrowed book api route
 export const borrowBook = async (req, res) => {
-      const session = await mongoose.startSession();
+    const session = await mongoose.startSession();
     session.startTransaction();
 
     try {
@@ -21,7 +21,7 @@ export const borrowBook = async (req, res) => {
         // Set issue date and return date (30 days later)
         const issuedate = new Date();
         const returndate = new Date();
-        returndate.setDate(issuedate.getDate() + 30); 
+        returndate.setDate(issuedate.getDate() + 30);
 
         // Get book details (optional, useful for dashboard)
         const bookDetails = await Book.findById(book_id);
