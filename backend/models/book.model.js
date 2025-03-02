@@ -33,6 +33,10 @@ const bookSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    pdf_file: {
+      type: String,
+      required: true,
+    },
     category: { type: String, required: true, trim: true },
     tags: {
       type: [String],

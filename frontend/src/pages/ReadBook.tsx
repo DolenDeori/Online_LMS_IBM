@@ -1,23 +1,61 @@
 import { Document, Page } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-import books_1 from "../assets/books/67bf1dd5b29d54d1be379aec.pdf";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
+
+interface Book {
+  _id: string;
+  pdfFile: string;
+}
+
+const port = "http://localhost:5173";
 
 const ReadBook = ({ darkMode }: { darkMode: boolean }) => {
+  // to controll the page number of the PDF file
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [scale, setScale] = useState(1.0);
+  const { id } = useParams();
 
-  const zoomIn = () => setScale((prev) => Math.min(prev + 0.1, 3.0)); // Max Zoom 3.0
-  const zoomOut = () => setScale((prev) => Math.max(prev - 0.1, 0.5)); // Min Zoom 0.5
+  // To controll the zoom in and zoom out of the PDF file
+  const zoomIn = () => setScale((prev) => Math.min(prev + 0.1, 3.0));
+  const zoomOut = () => setScale((prev) => Math.max(prev - 0.1, 0.5));
   const resetZoom = () => setScale(1.0);
+
+  const [book, setBook] = useState<Book | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  console.log(id);
+  // fetch book details
+  useEffect(() => {
+    fetch(`http://localhost:5500/api/v1/books/${id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setBook(data.data);
+        console.log(book);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching book details:", err);
+        setLoading(false);
+      });
+  }, [id]);
+
+  if (loading) {
+    return <div>Fatching Book..</div>;
+  }
+  if (!book) {
+    return <div>Book Not found</div>;
+  }
+
+  const bookLink = `${port}/src/files/${book.pdfFile}`;
 
   return (
     <section>
       <div className="p-4 font-funnel h-[80vh] overflow-y-scroll scrollbar-hidden relative">
         <Document
-          file={books_1}
+          file={bookLink}
           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
         >
           <Page
