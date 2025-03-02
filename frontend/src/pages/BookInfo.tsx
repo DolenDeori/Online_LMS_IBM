@@ -58,13 +58,23 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       alert("book is borrowed");
     }
   };
+
+  const handleBackButton = () => {
+    const lastVisitedUrl = localStorage.getItem("lastVisitedUrl");
+    if (lastVisitedUrl) {
+      navigate(lastVisitedUrl);
+      localStorage.removeItem("lastVisitedUrl");
+    } else {
+      navigate("/");
+    }
+  };
   return (
     <main
       className={`${darkMode ? "bg-gray-950" : "bg-white"} py-8 duration-200`}
     >
       <section className="p-4 lg:flex justify-center lg:w-[50%] gap-4 m-auto rounded-2xl font-funnel">
         <button
-          onClick={() => navigate("/")}
+          onClick={handleBackButton}
           className={` ${
             darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
           } h-12 w-13 rounded-full flex justify-center items-center cursor-pointer duration-200`}

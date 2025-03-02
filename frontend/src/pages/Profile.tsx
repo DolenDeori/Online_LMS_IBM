@@ -53,6 +53,11 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     alert("Logged out successfully!");
     navigate("/auth/signin");
   };
+
+  const handleBookRead = (bookId: string) => {
+    localStorage.setItem("lastVisitedUrl", `/profile`);
+    navigate(`/home/books/${bookId}`);
+  };
   return (
     <div
       className={`${
@@ -128,12 +133,12 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                       </td>
                       <td className="p-2 text-center">12 March 2025</td>
                       <td className="p-2 text-center">
-                        <NavLink
-                          to={`/home/books/${book._id}`}
-                          className=" p-1 px-2 bg-blue-900 rounded-sm"
+                        <button
+                          onClick={() => handleBookRead(book._id)}
+                          className=" p-1 px-2 bg-blue-900 text-white cursor-pointer rounded-sm"
                         >
                           Read
-                        </NavLink>
+                        </button>
                       </td>
                     </tr>
                   ))}
