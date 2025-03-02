@@ -55,6 +55,7 @@ function App() {
   // Apply darkmode to the main body
   useEffect(() => {
     if (darkMode) {
+      document.body.classList.add("duration-200")
       document.body.classList.add("bg-gray-950");
       document.body.classList.remove("bg-white");
     } else {
