@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
+const SIGNUP_API = import.meta.env.VITE_API_SIGN_UP_URL;
 const SignUp = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -23,20 +24,17 @@ const SignUp = ({ darkMode }: { darkMode: boolean }) => {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5500/api/v1/auth/sign-up",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            password: formData.password,
-          }),
-        }
-      );
+      const response = await fetch(`${SIGNUP_API}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
       const userResponse = await response.json();
 
