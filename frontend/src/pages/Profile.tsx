@@ -1,22 +1,29 @@
 import { images } from "@/constants";
 import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 interface User {
+  _id: string;
   name: string;
   email: string;
 }
 
-interface Book {
+interface BorrowedBook {
   _id: string;
-  title: string;
-  author: string;
+  book_id: {
+    _id: string;
+    title: string;
+    author: string;
+    bookPdf: string;
+    name:string;
+  };
+  returndate: string;
 }
 
 const Profile = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
-  const [books, setBooks] = useState<Book[]>([]);
+  const [borrowedBooks, setBorrowedBooks] = useState<BorrowedBook[]>([]);
 
   useEffect(() => {
     const userToken = localStorage.getItem("token");
@@ -35,17 +42,18 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     }
   }, [navigate]);
 
-  // Fetch books
+  // Fetch Borrowed Books
   useEffect(() => {
-    fetch("http://localhost:5500/api/v1/books")
+    if (!user) return; // Ensure user is loaded before fetching
+    fetch(`http://localhost:5500/api/v1/books/borrowed/${user._id}`)
       .then((res) => res.json())
       .then((data) => {
-        setBooks(data.data.slice(0, 5));
+        setBorrowedBooks(data);
       })
       .catch((err) => {
-        console.error("Error fetching books:", err);
+        console.error("Error fetching borrowed books:", err);
       });
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -54,10 +62,10 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     navigate("/auth/signin");
   };
 
-  const handleBookRead = (bookId: string) => {
-    localStorage.setItem("lastVisitedUrl", `/profile`);
-    navigate(`/home/books/${bookId}`);
+  const handleBookRead = (bookPdf: string) => {
+    window.open(bookPdf, "_blank"); // Open PDF in a new tab
   };
+
   return (
     <div
       className={`${
@@ -67,20 +75,13 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
       <div className="h-svh w-full flex-2 font-funnel">
         <div className="flex flex-col items-center pb-8">
           <div className="border-blue-800 h-16 w-16 flex justify-center items-center mt-8 rounded-full bg-blue-300">
-            <div>
-              <img
-                src={images.demo_profile_1}
-                alt=""
-                className="rounded-full"
-              />
-            </div>
+            <img src={images.demo_profile_1} alt="" className="rounded-full" />
           </div>
           <h1 className="font-semibold mt-2 text-xl">
             {user?.name || "Unknown User"}
           </h1>
           <p>{user?.email || "No email found"}</p>
           <div className="flex">
-            {" "}
             <button
               className="p-2 bg-blue-800 mt-5 ml-4 rounded-full px-4 text-white cursor-pointer"
               // onClick={handleLogout}
@@ -97,58 +98,54 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
         </div>
 
         <div className="mt-8 px-8 py-8">
-          <p>Current Holding: {books.length} / 20 Books</p>
+          <p>Current Holding: {borrowedBooks.length} / 20 Books</p>
 
           <div
             className={`${
               darkMode ? "bg-gray-950" : "bg-white"
             } mt-3 width-full h-[40vh] overflow-scroll duration-200 scrollbar-hidden rounded-xl relative`}
           >
-            {
-              <table className="table-auto border-collapse w-full rounded-2xl">
-                <thead
-                  className={`${
-                    darkMode ? "bg-gray-800" : "bg-gray-200"
-                  } sticky top-0`}
-                >
-                  <tr>
-                    <th className=" py-4 p-2">Book Id</th>
-                    <th className=" py-4 p-2">Books</th>
-                    <th className=" py-4 p-2">Book Due</th>
-                    <th className=" py-4 p-2">Read Book</th>
+            <table className="table-auto border-collapse w-full rounded-2xl">
+              <thead>
+                <tr>
+                  <th className=" py-4 p-2">Book Id</th>
+                  <th className=" py-4 p-2">Books</th>
+                  <th className=" py-4 p-2">Book Due</th>
+                  <th className=" py-4 p-2">Read Book</th>
+                </tr>
+              </thead>
+              <tbody className="border-t border-gray-600">
+                {borrowedBooks.map((borrowedBook, index) => (
+                  <tr
+                    className={`${
+                      darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                    } `}
+                    key={borrowedBook._id}
+                  >
+                    <td className="p-2 text-center">{index + 1}</td>
+                    <td className="p-2">
+                      <div>
+                        {/* <p className="font-semibold">{borrowedBook.book_id.title}</p> */}
+                        <p className={`text-gray-600 text-sm`}>
+                          {borrowedBook.book_id.name}
+                        </p>
+                      </div>
+                    </td>
+                    <td className="p-2 text-center">
+                      {new Date(borrowedBook.returndate).toDateString()}
+                    </td>
+                    <td className="p-2 text-center">
+                      <button
+                        onClick={() => handleBookRead(borrowedBook.book_id.bookPdf)}
+                        className="p-1 px-2 bg-blue-900 text-white cursor-pointer rounded-sm"
+                      >
+                        Read
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {books.map((book, index) => (
-                    <tr
-                      className={`${
-                        darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                      }`}
-                      key={book._id}
-                    >
-                      <td className="p-2 text-center">{index + 1}</td>
-                      <td className="p-2">
-                        <div>
-                          <p className="font-semibold">{book.title}</p>
-                          <p className={`text-gray-600 text-sm`}>
-                            {book.author}
-                          </p>
-                        </div>
-                      </td>
-                      <td className="p-2 text-center">12 March 2025</td>
-                      <td className="p-2 text-center">
-                        <button
-                          onClick={() => handleBookRead(book._id)}
-                          className=" p-1 px-4 bg-blend-lighten bg-blue-800 text-white cursor-pointer rounded-full"
-                        >
-                          Read
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            }
+                ))}
+              </tbody>
+            </table>
           </div>
 
           <button
