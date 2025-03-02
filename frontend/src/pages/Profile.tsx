@@ -1,4 +1,4 @@
-import { images } from "@/constants";
+import { books_pdf, images } from "@/constants";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
@@ -15,7 +15,7 @@ interface BorrowedBook {
     title: string;
     author: string;
     bookPdf: string;
-    name:string;
+    name: string;
   };
   returndate: string;
 }
@@ -62,15 +62,31 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     navigate("/auth/signin");
   };
 
-  const handleBookRead = (bookPdf: string) => {
-    window.open(bookPdf, "_blank"); // Open PDF in a new tab
+  const handleBookRead = (bookId: string) => {
+    navigate(`/read/book/${bookId}`); // Open PDF in a new tab
   };
+
+  function daysLeft(targetDate: string): string {
+    const now: Date = new Date(); // Current date and time
+    const target: Date = new Date(targetDate); // Convert target date string to Date object
+
+    // Calculate the difference in milliseconds
+    const diff: number = target.getTime() - now.getTime();
+
+    // Convert milliseconds to days
+    const daysRemaining: number = Math.ceil(diff / (1000 * 60 * 60 * 24));
+
+    // Return formatted message
+    return daysRemaining > 0
+      ? `${daysRemaining} day(s) left`
+      : "Time has passed!";
+  }
 
   return (
     <div
       className={`${
         darkMode ? "bg-gray-950 text-white" : "bg-white text-black"
-      } flex h-svh duration-200`}
+      } flex h-svh duration-200 py-16 md:py-4`}
     >
       <div className="h-svh w-full flex-2 font-funnel">
         <div className="flex flex-col items-center pb-8">
@@ -82,10 +98,7 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
           </h1>
           <p>{user?.email || "No email found"}</p>
           <div className="flex">
-            <button
-              className="p-2 bg-blue-800 mt-5 ml-4 rounded-full px-4 text-white cursor-pointer"
-              // onClick={handleLogout}
-            >
+            <button className="p-2 bg-blue-800 mt-5 ml-4 rounded-full px-4 text-white cursor-pointer">
               Edit Profile
             </button>
             <button
@@ -98,54 +111,48 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
         </div>
 
         <div className="mt-8 px-8 py-8">
-          <p>Current Holding: {borrowedBooks.length} / 20 Books</p>
+          <p>Current Holding: {borrowedBooks.length} / 10 Books</p>
 
           <div
-            className={`${
-              darkMode ? "bg-gray-950" : "bg-white"
-            } mt-3 width-full h-[40vh] overflow-scroll duration-200 scrollbar-hidden rounded-xl relative`}
+            className={`mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 width-full duration-200 rounded-xl relative`}
           >
-            <table className="table-auto border-collapse w-full rounded-2xl">
-              <thead>
-                <tr>
-                  <th className=" py-4 p-2">Book Id</th>
-                  <th className=" py-4 p-2">Books</th>
-                  <th className=" py-4 p-2">Book Due</th>
-                  <th className=" py-4 p-2">Read Book</th>
-                </tr>
-              </thead>
-              <tbody className="border-t border-gray-600">
-                {borrowedBooks.map((borrowedBook, index) => (
-                  <tr
+            {borrowedBooks.map((books) => (
+              <div
+                key={books._id}
+                className={`${
+                  darkMode
+                    ? "bg-gray-900 hover:bg-gray-800"
+                    : "bg-gray-100 hover:bg-gray-200"
+                } md:flex justify-between gap-2 items-center p-4 rounded-xl`}
+              >
+                <div className="flex-1">
+                  <h1 className="text-lg font-semibold line-clamp-1">
+                    {books.book_id.name}
+                  </h1>
+                  <p
                     className={`${
-                      darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
-                    } `}
-                    key={borrowedBook._id}
+                      darkMode ? "text-gray-400" : "text-gray-600"
+                    } text-sm`}
                   >
-                    <td className="p-2 text-center">{index + 1}</td>
-                    <td className="p-2">
-                      <div>
-                        {/* <p className="font-semibold">{borrowedBook.book_id.title}</p> */}
-                        <p className={`text-gray-600 text-sm`}>
-                          {borrowedBook.book_id.name}
-                        </p>
-                      </div>
-                    </td>
-                    <td className="p-2 text-center">
-                      {new Date(borrowedBook.returndate).toDateString()}
-                    </td>
-                    <td className="p-2 text-center">
-                      <button
-                        onClick={() => handleBookRead(borrowedBook.book_id.bookPdf)}
-                        className="p-1 px-2 bg-blue-900 text-white cursor-pointer rounded-sm"
-                      >
-                        Read
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                    {books.book_id.author}
+                  </p>
+                  <div className="md:flex md:justify-between">
+                    <p className="text-xs mt-5">
+                      Book Due:{" "}
+                      <span className="text-green-500">
+                        {daysLeft(books.returndate)}
+                      </span>
+                    </p>
+                    <button
+                      className="cursor-pointer px-4 py-2 bg-blue-800 rounded-md text-white"
+                      onClick={() => handleBookRead(books.book_id._id)}
+                    >
+                      Read Book
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
 
           <button
