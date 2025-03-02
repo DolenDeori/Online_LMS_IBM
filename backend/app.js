@@ -7,13 +7,14 @@ import errorMiddleware from './middleware/error.middleware.js';
 import cookieParser from 'cookie-parser';
 import cors from "cors";
 import bookRouter from './routes/book.routes.js'
+import borrowRouter from './routes/borrow.routes.js';
 
 
 const app = express();
 
 
 //Middleware
-app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(cors({ origin: "http://localhost:5174", credentials: true }));
 
 
 
@@ -26,6 +27,7 @@ app.use(cookieParser());  //read cookies from incoming reqs adn store user data
 app.use('/api/v1/auth' ,authRouter );
 app.use('/api/v1/users' ,userRouter );
 app.use('/api/v1/books' , bookRouter );
+app.use('/api/v1/books' , borrowRouter );
 
 
 //Middlewares
