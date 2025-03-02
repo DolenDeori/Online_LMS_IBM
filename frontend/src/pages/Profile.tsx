@@ -84,7 +84,7 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
           <div className="flex">
             <button
               className="p-2 bg-blue-800 mt-5 ml-4 rounded-full px-4 text-white cursor-pointer"
-              onClick={handleLogout}
+              // onClick={handleLogout}
             >
               Edit Profile
             </button>
@@ -102,8 +102,8 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
 
           <div
             className={`${
-              darkMode ? "bg-gray-900" : "bg-gray-100"
-            } mt-3 width-full overflow-x-scroll duration-200 scrollbar-hidden `}
+              darkMode ? "bg-gray-950" : "bg-white"
+            } mt-3 width-full h-[40vh] overflow-scroll duration-200 scrollbar-hidden rounded-xl relative`}
           >
             <table className="table-auto border-collapse w-full rounded-2xl">
               <thead>
