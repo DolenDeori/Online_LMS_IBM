@@ -12,6 +12,11 @@ import ProtectedRoute from "./route/ProtectedRoute";
 import AdminHome from "./admin/Home";
 import { useEffect, useState } from "react";
 import ScrollToTop from "./components/ScrollToTop";
+import ReadBook from "./pages/ReadBook";
+
+import { pdfjs } from "react-pdf";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 function App() {
   const location = useLocation();
@@ -55,7 +60,7 @@ function App() {
   // Apply darkmode to the main body
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add("duration-200")
+      document.body.classList.add("duration-200");
       document.body.classList.add("bg-gray-950");
       document.body.classList.remove("bg-white");
     } else {
@@ -99,9 +104,10 @@ function App() {
           <Route path="/auth/signup" element={<SignUp darkMode={darkMode} />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile" element={<Profile darkMode={darkMode} />} />
+            <Route path="/admin/home" element={<AdminHome />} />
             <Route
-              path="/admin/home"
-              element={<AdminHome darkMode={darkMode} />}
+              path="/read/book/:id"
+              element={<ReadBook darkMode={darkMode} />}
             />
           </Route>
         </Routes>
