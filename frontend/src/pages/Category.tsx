@@ -3,9 +3,11 @@ import { images } from "@/constants";
 const Category = ({ darkMode }: { darkMode: boolean }) => {
   return (
     <section
-      className={`${darkMode ? "bg-gray-950" : "bg-white"} py-16 duration-200`}
+      className={`${
+        darkMode ? "bg-gray-950" : "bg-white"
+      } md:py-16 py-32 duration-200`}
     >
-      <div className="text-center font-funnel w-[70%] m-auto">
+      <div className="text-center font-funnel px-4 lg:w-[70%] m-auto">
         <h1
           className={`${
             darkMode ? "text-white" : "text-black"
@@ -13,8 +15,8 @@ const Category = ({ darkMode }: { darkMode: boolean }) => {
         >
           Explore Books Categories
         </h1>
-        <div className="grid grid-cols-4 mt-8 gap-4 duration-200">
-          <div className="bg-black h-[250px] rounded-xl col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-8 gap-4 duration-200">
+          <div className="bg-black h-[250px] rounded-xl lg:col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
             <img src={images.audio_book} alt="" className="opacity-70" />
             <p className="absolute text-white font-bold text-xl">E Books</p>
           </div>
@@ -48,7 +50,7 @@ const Category = ({ darkMode }: { darkMode: boolean }) => {
               Slef Motivation
             </p>
           </div>
-          <div className="bg-black h-[250px] rounded-xl col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
+          <div className="bg-black h-[250px] rounded-xl lg:col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
             <img
               src={images.action_books}
               alt=""
@@ -86,7 +88,7 @@ const Category = ({ darkMode }: { darkMode: boolean }) => {
               Detective and mystery
             </p>
           </div>
-          <div className="bg-black h-[250px] rounded-xl col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
+          <div className="bg-black h-[250px] rounded-xl md:col-span-2 hover:scale-95 duration-300 flex justify-center items-center cursor-pointer overflow-hidden">
             <img
               src={images.art_photography}
               alt=""

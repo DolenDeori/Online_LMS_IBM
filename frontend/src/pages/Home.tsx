@@ -39,7 +39,7 @@ const Home = ({
 
   return (
     <>
-      <main className={` h-svh font-funnel`}>
+      <main className={` h-svh font-funnel py-20 md:py-8 lg:py-4`}>
         <section
           className={`p-4 ${
             darkMode ? "bg-gray-950" : "bg-white"
@@ -53,7 +53,7 @@ const Home = ({
             {home_title}
           </h1>
 
-          <div className="lg:columns-6 md:columns-3 md:space-y-12 space-y-6 lg:space-y-8 mt-5 mb-5">
+          <div className="lg:columns-6 md:columns-3 sm:columns-2 md:space-y-12 space-y-6 lg:space-y-8 mt-5 mb-5">
             {loading ? (
               <div className="flex justify-center items-center h-32">
                 <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-gray-500"></div>

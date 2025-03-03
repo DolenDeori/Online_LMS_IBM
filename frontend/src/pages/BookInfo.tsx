@@ -98,7 +98,7 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
     <main
       className={`${darkMode ? "bg-gray-950" : "bg-white"} py-8 duration-200`}
     >
-      <section className="p-4 lg:flex justify-center lg:w-[50%] gap-4 m-auto rounded-2xl font-funnel">
+      <section className="p-4 lg:flex justify-center md:w-[70%] lg:w-[50%] gap-4 m-auto rounded-2xl font-funnel">
         <button
           onClick={handleBackButton}
           className={` ${
