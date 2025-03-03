@@ -66,8 +66,7 @@ const SearchNav = ({
           darkMode
             ? "bg-gray-600 border-gray-500"
             : "bg-gray-200 border-gray-300"
-        } flex justify-between items-center rounded-xl p-1 px-4 flex-2 border-2  gap-1 relative`}
-        onClick={() => setIsNavFocused(!isNavFocused)}
+        } flex justify-between items-center rounded-xl p-1 px-4 flex-2 border-2 gap-1 relative`}
       >
         <i className="bi bi-search text-md text-gray-500"></i>
         <input
@@ -78,19 +77,25 @@ const SearchNav = ({
           placeholder="Search for Title, Author, Host or Topic ..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          onClick={() => setIsNavFocused(true)}
         />
         <button
           className={`${isNavFocused ? "" : "hidden"}`}
           onClick={() => setIsNavFocused(!isNavFocused)}
         >
-          <i className="bi bi-x text-gray-500 text-2xl cursor-pointer"></i>
+          <i
+            className={`${
+              darkMode ? "text-gray-300" : "text-gray-500"
+            } bi bi-x text-2xl cursor-pointer`}
+          ></i>
         </button>
       </div>
-      {/* Show search results */}
+
+      {/* --------------- Show search results -------------------- */}
       <div
-        className={`${
-          isNavFocused ? "" : "hidden"
-        } min-h-[20vh] bg-white left-0 rounded-b-xl top-[100%] w-full absolute -z-2`}
+        className={`${isNavFocused ? "" : "hidden"} ${
+          darkMode ? "bg-gray-900 text-white" : "bg-white"
+        } min-h-[20vh] left-0 rounded-b-xl top-[100%] w-full absolute -z-2`}
       >
         {searchQuery.length > 0 ? (
           searchResult.length > 0 ? (
@@ -98,7 +103,9 @@ const SearchNav = ({
               {searchResult.map((book) => (
                 <div
                   key={book._id}
-                  className="cursor-pointer hover:bg-gray-200 p-2 py-4 px-8"
+                  className={`${
+                    darkMode ? "hover:bg-gray-800" : "hover:bg-gray-200"
+                  } cursor-pointer  p-2 py-4 px-8`}
                   onClick={() => handleSearchResultClick(book._id)}
                 >
                   <i className="bi bi-search mr-4 text-gray-400"></i>
@@ -107,20 +114,23 @@ const SearchNav = ({
               ))}
             </div>
           ) : (
-            <div>
+            <div className="text-center">
               <p>No result found</p>
             </div>
           )
         ) : (
-          <div>Type Something to search..</div>
+          <div className="text-center">
+            <p>Type Something to search..</p>
+          </div>
         )}
       </div>
 
+      {/* ------------- Ligh Mode and Dark Mode button -------------- */}
+      <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
       {isAuth ? (
-        <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
+        ""
       ) : (
         <div className="flex justify-center items-center gap-1">
-          <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
           <NavLink
             to="/auth/signup"
             className={`${
