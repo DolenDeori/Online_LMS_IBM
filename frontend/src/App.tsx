@@ -26,6 +26,7 @@ function App() {
   const [darkMode, setDarkMode] = useState<boolean>(() => {
     return JSON.parse(localStorage.getItem("darkMode") || "false");
   });
+  const [isNavFocused, setIsNavFocused] = useState<boolean>(false);
 
   // Making sure dark mode remain even after the page is reloaded
   useEffect(() => {
@@ -71,6 +72,12 @@ function App() {
 
   return (
     <div className="md:flex h-screen">
+      <div
+        className={`${
+          isNavFocused ? "" : "hidden"
+        } overlay h-full w-full bg-black top-0 left-0 absolute z-10 opacity-40`}
+        onClick={() => setIsNavFocused(!isNavFocused)}
+      ></div>
       {!hideNavigation && (
         <Navigation isAuth={isAuthenticated} darkMode={darkMode} />
       )}
@@ -80,6 +87,8 @@ function App() {
             isAuth={isAuthenticated}
             darkMode={darkMode}
             setDarkMode={setDarkMode}
+            isNavFocused={isNavFocused}
+            setIsNavFocused={setIsNavFocused}
           />
         )}
 

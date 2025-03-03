@@ -92,9 +92,10 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     }
   };
 
+  // Function that can convert the date time to day left
   function daysLeft(targetDate: string): string {
-    const now: Date = new Date(); // Current date and time
-    const target: Date = new Date(targetDate); // Convert target date string to Date object
+    const now: Date = new Date();
+    const target: Date = new Date(targetDate);
 
     // Calculate the difference in milliseconds
     const diff: number = target.getTime() - now.getTime();
@@ -136,9 +137,10 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
           </div>
         </div>
 
+        {/* ---------------------- Profile Books Section ---------------- */}
         <div className="mt-8 px-8 py-8">
+          <h1 className="font-bold text-3xl mb-4">My Books</h1>
           <p>Current Holding: {borrowedBooks.length} / 10 Books</p>
-
           <div
             className={`mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 width-full duration-200 rounded-xl relative`}
           >
@@ -171,13 +173,13 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                     </p>
                     <div className="flex items-center gap-1">
                       <button
-                        className="bg-gray-500 cursor-pointer px-4 py-2 hover:bg-blue-800 text-sm rounded-l-3xl rounded-md text-white"
+                        className="bg-gray-500 cursor-pointer px-4 py-2 hover:bg-blue-800 text-sm rounded-l-3xl rounded-sm text-white"
                         onClick={() => handleBookRead(books.book_id._id)}
                       >
                         Read Book
                       </button>
                       <button
-                        className={`bg-gray-500 cursor-pointer px-3 py-1.5 hover:bg-red-800 rounded-md rounded-r-3xl text-white`}
+                        className={`bg-gray-500 cursor-pointer px-3 py-1.5 hover:bg-red-800 rounded-sm rounded-r-3xl text-white`}
                         onClick={() => handleRemoveBook(books.book_id._id)}
                       >
                         <i className="bi bi-trash"></i>
