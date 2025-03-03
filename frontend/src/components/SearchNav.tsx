@@ -53,6 +53,7 @@ const SearchNav = ({
     setSearchQuery("");
     navigate(`/home/books/${bookId}`);
   };
+
   return (
     <div
       className={`${
@@ -74,7 +75,7 @@ const SearchNav = ({
           className={`${
             darkMode ? "bg-gray-600 text-white" : "bg-gray-200 "
           } w-full outline-none p-2 text-sm`}
-          placeholder="Search for Title, Author, Host or Topic ..."
+          placeholder="Search by Book Name, Author, Host or Category ..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onClick={() => setIsNavFocused(true)}
@@ -95,7 +96,7 @@ const SearchNav = ({
       <div
         className={`${isNavFocused ? "" : "hidden"} ${
           darkMode ? "bg-gray-900 text-white" : "bg-white"
-        } min-h-[20vh] left-0 rounded-b-xl top-[100%] w-full absolute -z-2`}
+        } min-h-[20vh] left-0 rounded-b-xl top-[100%] w-full absolute -z-2 overflow-hidden`}
       >
         {searchQuery.length > 0 ? (
           searchResult.length > 0 ? (

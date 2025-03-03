@@ -41,9 +41,15 @@ const SignUp = ({ darkMode }: { darkMode: boolean }) => {
       if (response.ok) {
         localStorage.setItem("token", userResponse.data.token);
         localStorage.setItem("user", JSON.stringify(userResponse.data.user));
+        const previousVisitedLink = localStorage.getItem("lastAttemptedUrl");
         alert("User registered successfully!");
 
-        navigate("/profile");
+        if (previousVisitedLink) {
+          navigate(previousVisitedLink);
+          localStorage.removeItem("lastAttemptedUrl");
+        } else {
+          navigate("/profile");
+        }
       } else {
         alert(userResponse.message || "Error occurred!");
       }
