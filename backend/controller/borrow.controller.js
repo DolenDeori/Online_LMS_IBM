@@ -36,7 +36,6 @@ export const borrowBook = async (req, res) => {
       book_id,
       issuedate,
       returndate,
-      // bookPdf: bookDetails.bookPdf // Linking the PDF URL from book collection
     });
 
     await newBorrow.save();

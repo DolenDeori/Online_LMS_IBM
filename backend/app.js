@@ -14,7 +14,7 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://9088-103-173-200-2.ngrok-free.app",
+  "https://0e32-152-59-148-142.ngrok-free.app",
 ];
 //Middleware
 app.use(
