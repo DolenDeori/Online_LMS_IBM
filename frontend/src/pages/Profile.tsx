@@ -66,6 +66,10 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     navigate(`/read/book/${bookId}`); // Open PDF in a new tab
   };
 
+  // const handleBookDelete = () {
+
+  // }
+
   function daysLeft(targetDate: string): string {
     const now: Date = new Date(); // Current date and time
     const target: Date = new Date(targetDate); // Convert target date string to Date object
@@ -143,12 +147,20 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                         {daysLeft(books.returndate)}
                       </span>
                     </p>
-                    <button
-                      className="cursor-pointer px-4 py-2 bg-blue-800 rounded-md text-white"
-                      onClick={() => handleBookRead(books.book_id._id)}
-                    >
-                      Read Book
-                    </button>
+                    <div className="flex items-center gap-1">
+                      <button
+                        className="cursor-pointer px-4 py-2 bg-blue-800 text-sm rounded-l-3xl rounded-md text-white"
+                        onClick={() => handleBookRead(books.book_id._id)}
+                      >
+                        Read Book
+                      </button>
+                      <button
+                        className="cursor-pointer px-3 py-1.5 mt-0.5 bg-red-800 rounded-md rounded-r-3xl text-white"
+                        onClick={() => handleBookRead(books.book_id._id)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
