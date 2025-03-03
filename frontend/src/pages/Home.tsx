@@ -90,7 +90,9 @@ const Home = ({
                 </div>
               ))
             ) : (
-              <p>No books Found</p>
+              <p className={`${darkMode ? "text-white" : "text-black"}`}>
+                No books Found
+              </p>
             )}
           </div>
         </section>
