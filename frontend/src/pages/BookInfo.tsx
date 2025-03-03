@@ -19,6 +19,8 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState(true);
 
+  
+
   useEffect(() => {
     fetch(`http://localhost:5500/api/v1/books/${id}`)
       .then((res) => res.json())

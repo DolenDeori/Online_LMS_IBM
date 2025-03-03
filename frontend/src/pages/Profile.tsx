@@ -149,13 +149,13 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                     </p>
                     <div className="flex items-center gap-1">
                       <button
-                        className="cursor-pointer px-4 py-2 bg-blue-800 text-sm rounded-l-3xl rounded-md text-white"
+                        className="bg-gray-500 cursor-pointer px-4 py-2 hover:bg-blue-800 text-sm rounded-l-3xl rounded-md text-white"
                         onClick={() => handleBookRead(books.book_id._id)}
                       >
                         Read Book
                       </button>
                       <button
-                        className="cursor-pointer px-3 py-1.5 mt-0.5 bg-red-800 rounded-md rounded-r-3xl text-white"
+                        className={`bg-gray-500 cursor-pointer px-3 py-1.5 mt-0.5 hover:bg-red-800 rounded-md rounded-r-3xl text-white`}
                         onClick={() => handleBookRead(books.book_id._id)}
                       >
                         <i className="bi bi-trash"></i>
