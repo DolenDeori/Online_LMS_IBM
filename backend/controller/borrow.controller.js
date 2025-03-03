@@ -51,7 +51,6 @@ export const borrowBook = async (req, res) => {
 };
 
 //get the borrowed book api route
-
 export const getBorrowedBooks = async (req, res) => {
   try {
     const { user_id } = req.params;
@@ -62,6 +61,27 @@ export const getBorrowedBooks = async (req, res) => {
     );
 
     res.status(200).json(borrowedBooks);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
+
+// remove borrowed books
+export const deleteBorrowedBook = async (req, res) => {
+  try {
+    const { user_id, book_id } = req.params;
+
+    // Find and delete the borrowed book entry
+    const deletedBook = await BorrowedBook.findOneAndDelete({
+      user_id,
+      book_id,
+    });
+
+    if (!deletedBook) {
+      return res.status(404).json({ message: "Borrowed book not found" });
+    }
+
+    res.status(200).json({ message: "Borrowed book removed successfully" });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }

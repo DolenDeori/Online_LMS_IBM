@@ -1,6 +1,9 @@
-import { books_pdf, images } from "@/constants";
+import { images } from "@/constants";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
+
+const BORROWED_BOOKS_API_URL = "http://localhost:5500/api/v1/books/borrowed";
 
 interface User {
   _id: string;
@@ -62,13 +65,32 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
     navigate("/auth/signin");
   };
 
+  // Handle read request for the borrowed book
   const handleBookRead = (bookId: string) => {
-    navigate(`/read/book/${bookId}`); // Open PDF in a new tab
+    navigate(`/read/book/${bookId}`);
   };
 
-  // const handleBookDelete = () {
+  // Handle the delete remove requiest if user don't what the borrowed book
+  const handleRemoveBook = async (bookId: string) => {
+    try {
+      const res = await axios.delete(
+        `${BORROWED_BOOKS_API_URL}/${user?._id}/${bookId}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        }
+      );
 
-  // }
+      if (res.status === 200) {
+        alert("Book removed successfully!");
+        setBorrowedBooks((prevBooks) =>
+          prevBooks.filter((book) => book.book_id._id !== bookId)
+        );
+      }
+    } catch (error) {
+      console.error("Error removing book:", error);
+      alert("Failed to remove book.");
+    }
+  };
 
   function daysLeft(targetDate: string): string {
     const now: Date = new Date(); // Current date and time
@@ -155,8 +177,8 @@ const Profile = ({ darkMode }: { darkMode: boolean }) => {
                         Read Book
                       </button>
                       <button
-                        className={`bg-gray-500 cursor-pointer px-3 py-1.5 mt-0.5 hover:bg-red-800 rounded-md rounded-r-3xl text-white`}
-                        onClick={() => handleBookRead(books.book_id._id)}
+                        className={`bg-gray-500 cursor-pointer px-3 py-1.5 hover:bg-red-800 rounded-md rounded-r-3xl text-white`}
+                        onClick={() => handleRemoveBook(books.book_id._id)}
                       >
                         <i className="bi bi-trash"></i>
                       </button>
