@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import Home from "./Home";
+import axios from "axios";
 
 interface Book {
   _id: string;
@@ -13,13 +14,36 @@ interface Book {
   coverImage: string;
 }
 
+const GET_BORROWED_BOOK = import.meta.env.VITE_API_BORROWED_BOOKS_URL;
+
 const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState<Book | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [borrowedBooks, setBorrowedBooks] = useState<string[]>([]);
 
-  
+  const getBorrowdBooks = async () => {
+    try {
+      const user = JSON.parse(localStorage.getItem("user") || "{}");
+      if (!user?._id) return;
+
+      const res = await axios.get(`${GET_BORROWED_BOOK}/${user?._id}`);
+      const bookIDs = res.data.map((info: any) => info.book_id._id);
+      setBorrowedBooks(bookIDs);
+    } catch (error) {
+      console.error("Error fetching borrowed books: ", error);
+    }
+  };
+
+  useEffect(() => {
+    getBorrowdBooks();
+  }, []);
+
+  // function to check if the given book ID is in the borrwed Books List or not
+  const isBorrowed = (bookId: string): boolean => {
+    return borrowedBooks.includes(bookId);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5500/api/v1/books/${id}`)
@@ -51,6 +75,7 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       })
     : "Unknown Date";
 
+  // This function will handle the borrowing of book.
   const handleBookBorrow = () => {
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -87,6 +112,7 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       });
   };
 
+  // This function will handle the back button.
   const handleBackButton = () => {
     const lastVisitedUrl = localStorage.getItem("lastVisitedUrl");
     if (lastVisitedUrl) {
@@ -96,6 +122,7 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
       navigate("/");
     }
   };
+
   return (
     <main
       className={`${darkMode ? "bg-gray-950" : "bg-white"} py-8 duration-200`}
@@ -215,12 +242,21 @@ const BookInfo = ({ darkMode }: { darkMode: boolean }) => {
               </div>
             </div>
             <div className="flex gap-0.5  ">
-              <button
-                className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer"
-                onClick={handleBookBorrow}
-              >
-                Borrow Book
-              </button>
+              {isBorrowed(id!) ? (
+                <button
+                  className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer"
+                  onClick={() => navigate(`/read/book/${id}`)}
+                >
+                  Read Now
+                </button>
+              ) : (
+                <button
+                  className="bg-blue-800 text-white p-2 px-8 rounded-l-3xl rounded-r-sm cursor-pointer"
+                  onClick={handleBookBorrow}
+                >
+                  Borrow Book
+                </button>
+              )}
               <button className="bg-blue-800 text-white px-4 rounded-r-3xl rounded-l-sm cursor-pointer">
                 <i className="bi bi-bookmark"></i>
               </button>

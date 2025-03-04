@@ -26,14 +26,12 @@ const ReadBook = ({ darkMode }: { darkMode: boolean }) => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  console.log(id);
   // fetch book details
   useEffect(() => {
     fetch(`http://localhost:5500/api/v1/books/${id}`)
       .then((res) => res.json())
       .then((data) => {
         setBook(data.data);
-        console.log(book);
         setLoading(false);
       })
       .catch((err) => {
@@ -43,10 +41,18 @@ const ReadBook = ({ darkMode }: { darkMode: boolean }) => {
   }, [id]);
 
   if (loading) {
-    return <div>Fatching Book..</div>;
+    return (
+      <div className={`${darkMode ? "text-white" : "text-black"}`}>
+        Fatching Book..
+      </div>
+    );
   }
   if (!book) {
-    return <div>Book Not found</div>;
+    return (
+      <div className={`${darkMode ? "text-white" : "text-black"}`}>
+        Book Not found
+      </div>
+    );
   }
 
   const bookLink = `${port}/src/files/${book.pdfFile}`;
